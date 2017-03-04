@@ -1,4 +1,5 @@
 import {Component, PropTypes} from 'react'
+import { JobRow } from './JobRow'
 
 export class JobList extends Component {
 
@@ -19,6 +20,16 @@ export class JobList extends Component {
               <td>Link</td>
             </tr>
           </thead>
+          <tbody>
+            {this.props.myJobs.map(
+              (job, i) => <JobRow key={i} 
+                                  index={i}
+                                  {...job}
+                          />
+              )
+            }
+            
+          </tbody>
         </table>
       </div>
     );
