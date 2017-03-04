@@ -41,8 +41,17 @@ export class App extends Component {
       ]
     };
 
+    this.addJob = this.addJob.bind(this);
     this.editJob = this.editJob.bind(this);
     this.removeJob = this.removeJob.bind(this);
+  }
+
+  addJob(newJob) {
+    let arr = this.state.jobs;
+    arr.push(newJob);
+    this.setState({
+      jobs: arr
+    });
   }
 
   editJob(i, newInfo) {
@@ -62,8 +71,6 @@ export class App extends Component {
     });
   }
 
-
-
   render() {
     return (
       <div className="app-container">
@@ -74,7 +81,7 @@ export class App extends Component {
                     removeFromBoard={this.removeJob}
         />
         <br />
-        <AddJobForm />
+        <AddJobForm addNewJob={this.addJob}/>
       </div>
     );
   }

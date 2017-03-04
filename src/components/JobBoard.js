@@ -28,7 +28,7 @@ export class JobBoard extends Component {
             }  
           </div>
       </div>) :
-      //currently no job applications
+      //else, currently no job applications
       (<h1 className="no-job">No applications now</h1>)
 
     );
