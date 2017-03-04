@@ -1,5 +1,5 @@
 import { Component, PropTypes } from 'react'
-import Pencil from 'react-icons/lib/fa/pencil'
+import PaperPlane from 'react-icons/lib/fa/paper-plane-o'
 import RepliedJob from 'react-icons/lib/fa/calendar-check-o'
 import PendingJob from 'react-icons/lib/fa/calendar-o'
 import DeclinedJob from 'react-icons/lib/fa/calendar-times-o'
@@ -14,7 +14,7 @@ export class JobCount extends Component {
   render() {
     return (
       <div className="jobCount-container">
-        <Pencil />
+        <PaperPlane />
         <h1 className="totalJobs">Total {this.props.total}</h1>
         <RepliedJob />
         <h2 className="repliedJobs">Replied {this.props.replied}</h2>

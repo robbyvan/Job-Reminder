@@ -21,7 +21,8 @@ export class JobBoard extends Component {
               (job, i) => <JobBlock key={i} 
                                   index={i}
                                   {...job}
-                                  editJob={this.props.editJob}
+                                  saveMyEdit={this.props.editJob}
+                                  removeFromBoard={this.props.removeFromBoard}
                           />
               )
             }  

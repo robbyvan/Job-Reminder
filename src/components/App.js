@@ -41,19 +41,38 @@ export class App extends Component {
       ]
     };
 
-    this.editJobInfo = this.editJobInfo.bind(this);
+    this.editJob = this.editJob.bind(this);
+    this.removeJob = this.removeJob.bind(this);
   }
 
-  editJobInfo(index) {
-    console.log('editing at App.js: ' + index);
+  editJob(i, newInfo) {
+    console.log('editing at App.js: ' + i);
+    let arr = this.state.jobs;
+    arr[i] = newInfo;
+    this.setState({
+      jobs: arr
+    });
   }
+
+  removeJob(i) {
+    let arr = this.state.jobs;
+    arr.splice(i, 1);
+    this.setState({
+      jobs: arr
+    });
+  }
+
+
 
   render() {
     return (
       <div className="app-container">
         <h1>This is my app</h1>
         <JobCount />
-        <JobBoard myJobs={this.state.jobs} editJob={this.editJobInfo}/>
+        <JobBoard   myJobs={this.state.jobs} 
+                    editJobInfo={this.editJob}
+                    removeFromBoard={this.removeJob}
+        />
         <br />
         <AddJobForm />
       </div>
