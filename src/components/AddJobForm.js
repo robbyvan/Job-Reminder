@@ -22,7 +22,7 @@ export class AddJobForm extends Component {
 
   render() {
     return (
-      <form className="add-job">
+      <form onSubmit={this.handleSubmit} className="add-job">
 
         <label htmlFor="company">Company</label>
         <input id="company"
@@ -64,7 +64,7 @@ export class AddJobForm extends Component {
                ref="jobLink"
         />
 
-        <button onClick={this.handleSubmit}>Add to Application Reminder</button>
+        <button>Add to Application Reminder</button>
       </form>
     );
   }

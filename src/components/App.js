@@ -44,6 +44,7 @@ export class App extends Component {
     this.addJob = this.addJob.bind(this);
     this.editJob = this.editJob.bind(this);
     this.removeJob = this.removeJob.bind(this);
+    this.renderJobBoard = this.renderJobBoard.bind(this);
   }
 
   addJob(newJob) {
@@ -71,17 +72,25 @@ export class App extends Component {
     });
   }
 
+  renderJobBoard() {
+    return (
+      <JobBoard   myJobs={this.state.jobs} 
+                  editJobInfo={this.editJob}
+                  removeFromBoard={this.removeJob}
+      />
+    );
+  }
+
   render() {
     return (
       <div className="app-container">
-        <h1>This is my app</h1>
-        <JobCount />
-        <JobBoard   myJobs={this.state.jobs} 
-                    editJobInfo={this.editJob}
-                    removeFromBoard={this.removeJob}
-        />
-        <br />
-        <AddJobForm addNewJob={this.addJob}/>
+        <h1>Job Application Reminder</h1>
+        {(this.props.location.pathname === "/")?
+            <JobCount /> :
+          (this.props.location.pathname === "add-job")?
+            <AddJobForm addNewJob={this.addJob} /> :
+            this.renderJobBoard()
+        }  
       </div>
     );
   }
