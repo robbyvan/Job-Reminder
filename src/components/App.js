@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { JobCount } from './JobCount'
 import { JobList } from './JobList'
+import { AddJobForm } from './AddJobForm'
 
 
 export class App extends Component {
@@ -14,28 +15,28 @@ export class App extends Component {
           appliedDate: new Date('3/1/2017'),
           position: 'Front-End Engineer',
           status: 'pending',
-          link: '#'
+          jobLink: '#'
         },
         {
           company: 'Yahoo',
           appliedDate: new Date('2/15/2017'),
           position: '2017 Summer Intern',
           status: 'pending',
-          link: '#'
+          jobLink: '#'
         },
         {
           company: 'LiveRamp',
           appliedDate: new Date('2/15/2017'),
           position: 'Software Engineer',
           status: 'replied',
-          link: '#'
+          jobLink: '#'
         },
         {
           company: 'Redfin',
           appliedDate: new Date('2/10/2017'),
           position: 'Software Engineer',
           status: 'delclined',
-          link: '#'
+          jobLink: '#'
         }
       ]
     };
@@ -45,7 +46,10 @@ export class App extends Component {
     return (
       <div className="app-container">
         <h1>This is my app</h1>
+        <JobCount />
         <JobList myJobs={this.state.jobs} />
+        <br />
+        <AddJobForm />
       </div>
     );
   }
