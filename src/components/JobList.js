@@ -8,9 +8,15 @@ export class JobList extends Component {
   }
 
   render() {
+
+    let jobLength = this.props.myJobs.length;
+
     return (
-      <div className="job-list">
+      (jobLength > 0)?
+      //myJob is not empty
+      (<div className="job-list">
         <table>
+
           <thead>
             <tr>
               <td>Company</td>
@@ -20,6 +26,7 @@ export class JobList extends Component {
               <td>Link</td>
             </tr>
           </thead>
+
           <tbody>
             {this.props.myJobs.map(
               (job, i) => <JobRow key={i} 
@@ -27,12 +34,26 @@ export class JobList extends Component {
                                   {...job}
                           />
               )
-            }
-            
+            }  
           </tbody>
+
         </table>
-      </div>
+      </div>) :
+      //currently no job applications
+      (<h1 className="no-job">No applications now</h1>)
+
     );
   }
+}
 
+JobList.propTypes = {
+  myJobs: function(props){
+    if (!Array.isArray(props.myJobs)){
+      return new Error(
+        "myJobs should be an array"
+      );
+    }else{
+        return null;
+    }
+  }
 }
