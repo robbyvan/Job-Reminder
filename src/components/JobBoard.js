@@ -1,7 +1,7 @@
 import {Component, PropTypes} from 'react'
-import { JobRow } from './JobRow'
+import { JobBlock } from './JobBlock'
 
-export class JobList extends Component {
+export class JobBoard extends Component {
 
   constructor(props) {
     super(props);
@@ -14,30 +14,18 @@ export class JobList extends Component {
     return (
       (jobLength > 0)?
       //myJob is not empty
-      (<div className="job-list">
-        <table>
-
-          <thead>
-            <tr>
-              <td>Company</td>
-              <td>Applied Date</td>
-              <td>Position</td>
-              <td>Status</td>
-              <td>Link</td>
-            </tr>
-          </thead>
-
-          <tbody>
+      (<div className="job-board">
+          <h1>Current Applications</h1>
+          <div className='job-blocks'>
             {this.props.myJobs.map(
-              (job, i) => <JobRow key={i} 
+              (job, i) => <JobBlock key={i} 
                                   index={i}
                                   {...job}
+                                  editJob={this.props.editJob}
                           />
               )
             }  
-          </tbody>
-
-        </table>
+          </div>
       </div>) :
       //currently no job applications
       (<h1 className="no-job">No applications now</h1>)
@@ -46,7 +34,7 @@ export class JobList extends Component {
   }
 }
 
-JobList.propTypes = {
+JobBoard.propTypes = {
   myJobs: function(props){
     if (!Array.isArray(props.myJobs)){
       return new Error(

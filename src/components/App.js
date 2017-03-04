@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { JobCount } from './JobCount'
-import { JobList } from './JobList'
+import { JobBoard } from './JobBoard'
 import { AddJobForm } from './AddJobForm'
 
 
@@ -15,31 +15,37 @@ export class App extends Component {
           appliedDate: new Date('3/1/2017'),
           position: 'Front-End Engineer',
           status: 'pending',
-          jobLink: '#'
+          jobLink: 'aliLink'
         },
         {
           company: 'Yahoo',
           appliedDate: new Date('2/15/2017'),
           position: '2017 Summer Intern',
           status: 'pending',
-          jobLink: '#'
+          jobLink: 'YahooCareer'
         },
         {
           company: 'LiveRamp',
           appliedDate: new Date('2/15/2017'),
           position: 'Software Engineer',
           status: 'replied',
-          jobLink: '#'
+          jobLink: 'LRCareer'
         },
         {
           company: 'Redfin',
           appliedDate: new Date('2/10/2017'),
           position: 'Software Engineer',
           status: 'delclined',
-          jobLink: '#'
+          jobLink: 'RFCareer'
         }
       ]
     };
+
+    this.editJobInfo = this.editJobInfo.bind(this);
+  }
+
+  editJobInfo(index) {
+    console.log('editing at App.js: ' + index);
   }
 
   render() {
@@ -47,7 +53,7 @@ export class App extends Component {
       <div className="app-container">
         <h1>This is my app</h1>
         <JobCount />
-        <JobList myJobs={this.state.jobs} />
+        <JobBoard myJobs={this.state.jobs} editJob={this.editJobInfo}/>
         <br />
         <AddJobForm />
       </div>
