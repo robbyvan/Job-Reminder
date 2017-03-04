@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { Menu } from './Menu'
 import { JobCount } from './JobCount'
 import { JobBoard } from './JobBoard'
 import { AddJobForm } from './AddJobForm'
@@ -85,9 +86,10 @@ export class App extends Component {
     return (
       <div className="app-container">
         <h1>Job Application Reminder</h1>
+        <Menu />
         {(this.props.location.pathname === "/")?
             <JobCount /> :
-          (this.props.location.pathname === "add-job")?
+          (this.props.location.pathname === "/add-job")?
             <AddJobForm addNewJob={this.addJob} /> :
             this.renderJobBoard()
         }  
