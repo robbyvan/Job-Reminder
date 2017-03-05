@@ -21609,7 +21609,7 @@
 	    key: 'renderJobBoard',
 	    value: function renderJobBoard() {
 	      return React.createElement(_JobBoard.JobBoard, { myJobs: this.state.jobs,
-	        editJobInfo: this.editJob,
+	        editJob: this.editJob,
 	        removeFromBoard: this.removeJob
 	      });
 	    }
@@ -27416,7 +27416,7 @@
 /* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -27446,7 +27446,7 @@
 	  }
 
 	  _createClass(AddJobForm, [{
-	    key: "handleSubmit",
+	    key: 'handleSubmit',
 	    value: function handleSubmit() {
 	      var newJob = {
 	        company: this.refs.company.value,
@@ -27457,72 +27457,73 @@
 	      };
 
 	      this.props.addNewJob(newJob);
+	      alert('New Job Application Added.');
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
-	        "form",
-	        { onSubmit: this.handleSubmit, className: "add-job" },
+	        'form',
+	        { onSubmit: this.handleSubmit, className: 'add-job' },
 	        React.createElement(
-	          "label",
-	          { htmlFor: "company" },
-	          "Company"
+	          'label',
+	          { htmlFor: 'company' },
+	          'Company'
 	        ),
-	        React.createElement("input", { id: "company",
-	          type: "text",
+	        React.createElement('input', { id: 'company',
+	          type: 'text',
 	          required: true,
-	          defaultValue: this.props.company,
-	          ref: "company"
+	          placeholder: 'Company',
+	          ref: 'company'
 	        }),
 	        React.createElement(
-	          "label",
-	          { htmlFor: "position" },
-	          "Position"
+	          'label',
+	          { htmlFor: 'position' },
+	          'Position'
 	        ),
-	        React.createElement("input", { id: "position",
-	          type: "text",
+	        React.createElement('input', { id: 'position',
+	          type: 'text',
 	          required: true,
-	          defaultValue: this.props.position,
-	          ref: "position"
+	          placeholder: 'Position',
+	          ref: 'position'
 	        }),
 	        React.createElement(
-	          "label",
-	          { htmlFor: "appliedDate" },
-	          "Applied Date"
+	          'label',
+	          { htmlFor: 'appliedDate' },
+	          'Applied Date'
 	        ),
-	        React.createElement("input", { id: "appliedDate",
-	          type: "date",
+	        React.createElement('input', { id: 'appliedDate',
+	          type: 'date',
 	          required: true,
-	          defaultValue: this.props.appliedDate,
-	          ref: "appliedDate"
+	          placeholder: 'mm-dd-yyyy',
+	          ref: 'appliedDate'
 	        }),
 	        React.createElement(
-	          "label",
-	          { htmlFor: "status" },
-	          "Current Status"
+	          'label',
+	          { htmlFor: 'status' },
+	          'Current Status'
 	        ),
-	        React.createElement("input", { id: "status",
-	          type: "text",
+	        React.createElement('input', { id: 'status',
+	          type: 'text',
 	          required: true,
-	          defaultValue: this.props.status,
-	          ref: "status"
+	          placeholder: 'Current Status',
+	          ref: 'status'
 	        }),
 	        React.createElement(
-	          "label",
-	          { htmlFor: "jobLink" },
-	          "Job Link"
+	          'label',
+	          { htmlFor: 'jobLink' },
+	          'Job Link'
 	        ),
-	        React.createElement("input", { id: "jobLink",
-	          type: "text",
+	        React.createElement('input', { id: 'jobLink',
+	          type: 'text',
 	          required: true,
-	          defaultValue: this.props.jobLink,
-	          ref: "jobLink"
+	          placeholder: 'Career page',
+	          ref: 'jobLink'
 	        }),
 	        React.createElement(
-	          "button",
+	          'button',
 	          null,
-	          "Add to Application Reminder"
+	          'Add to Application Reminder'
 	        )
 	      );
 	    }

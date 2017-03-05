@@ -17,7 +17,7 @@ export class AddJobForm extends Component {
     };
 
     this.props.addNewJob(newJob);
-
+    alert('New Job Application Added.');
   }
 
   render() {
@@ -28,7 +28,7 @@ export class AddJobForm extends Component {
         <input id="company"
                type="text"
                required
-               defaultValue={this.props.company}
+               placeholder="Company"
                ref="company"
         />
 
@@ -36,7 +36,7 @@ export class AddJobForm extends Component {
         <input id="position"
                type="text"
                required
-               defaultValue={this.props.position}
+               placeholder="Position"
                ref="position"
         />
 
@@ -44,7 +44,7 @@ export class AddJobForm extends Component {
         <input id="appliedDate"
                type="date"
                required
-               defaultValue={this.props.appliedDate}
+               placeholder="mm-dd-yyyy"
                ref="appliedDate"
         />
 
@@ -52,7 +52,7 @@ export class AddJobForm extends Component {
         <input id="status"
                type="text"
                required
-               defaultValue={this.props.status}
+               placeholder="Current Status"
                ref="status"
         />
 
@@ -60,7 +60,7 @@ export class AddJobForm extends Component {
         <input id="jobLink"
                type="text"
                required
-               defaultValue={this.props.jobLink}
+               placeholder="Career page"
                ref="jobLink"
         />
 

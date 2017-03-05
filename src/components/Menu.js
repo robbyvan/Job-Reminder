@@ -8,15 +8,21 @@ import PencilIcon from 'react-icons/lib/fa/pencil'
 export const Menu = () => {
   return (
     <div className="menu">
-      <Link to="/">
-        <HomeIcon />
-      </Link>
-      <Link to="/job-list">
-        <ListIcon />
-      </Link>
-      <Link to="/add-job">
-        <PencilIcon />
-      </Link>
+      <div className="menu-home">
+        <Link to="/">
+          <HomeIcon />
+        </Link>
+      </div>
+      <div className="menu-list">
+        <Link to="/job-list">
+          <ListIcon />
+        </Link>
+      </div>
+      <div className="menu-add">
+        <Link to="/add-job">
+          <PencilIcon />
+        </Link>
+      </div>
     </div>
   );
 }

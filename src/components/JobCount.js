@@ -3,7 +3,7 @@ import PaperPlane from 'react-icons/lib/fa/paper-plane-o'
 import RepliedJob from 'react-icons/lib/fa/calendar-check-o'
 import PendingJob from 'react-icons/lib/fa/calendar-o'
 import DeclinedJob from 'react-icons/lib/fa/calendar-times-o'
-
+require('./../stylesheets/JobCount.scss')
 
 export class JobCount extends Component {
 
@@ -14,14 +14,26 @@ export class JobCount extends Component {
   render() {
     return (
       <div className="jobCount-container">
-        <PaperPlane />
-        <h1 className="totalJobs">Total {this.props.total}</h1>
-        <RepliedJob />
-        <h2 className="repliedJobs">Replied {this.props.replied}</h2>
-        <PendingJob />
-        <h2 className="pendingJobs">Pending {this.props.pending}</h2>
-        <DeclinedJob />
-        <h2 className="declinedJobs">Declined {this.props.declined}</h2>
+        <div className="totalJobs">
+          <PaperPlane />
+          <h1>Total {this.props.total}</h1>
+        </div>
+        <div className="jobStatus">
+          <div className="repliedJobs">
+            <RepliedJob />
+            <h2>Replied {this.props.replied}</h2>
+          </div>
+          <div className="pendingJobs">
+            <PendingJob />
+            <h2>Pending {this.props.pending}</h2>
+          </div>
+          <div className="declinedJobs">
+            <DeclinedJob />
+            <h2>Declined {this.props.declined}</h2>
+          </div>
+        </div>
+        
+        
       </div>
     );
   }

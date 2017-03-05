@@ -28,9 +28,13 @@ module.exports = {
         loader: "json-loader"
       },
       {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
+      },
+      {
         test: /\.css$/,
         loader: 'style-loader!css-loader!autoprefixer-loader'
-      }
+      },
     ]
   }
 }

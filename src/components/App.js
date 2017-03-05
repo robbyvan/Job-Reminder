@@ -3,6 +3,8 @@ import { Menu } from './Menu'
 import { JobCount } from './JobCount'
 import { JobBoard } from './JobBoard'
 import { AddJobForm } from './AddJobForm'
+require('./../stylesheets/app.scss')
+
 
 
 export class App extends Component {
@@ -76,7 +78,7 @@ export class App extends Component {
   renderJobBoard() {
     return (
       <JobBoard   myJobs={this.state.jobs} 
-                  editJobInfo={this.editJob}
+                  editJob={this.editJob}
                   removeFromBoard={this.removeJob}
       />
     );
@@ -85,14 +87,16 @@ export class App extends Component {
   render() {
     return (
       <div className="app-container">
-        <h1>Job Application Reminder</h1>
         <Menu />
-        {(this.props.location.pathname === "/")?
-            <JobCount /> :
-          (this.props.location.pathname === "/add-job")?
-            <AddJobForm addNewJob={this.addJob} /> :
-            this.renderJobBoard()
-        }  
+        <h1 className="app-name">Job Application Reminder</h1>
+        <div className="page-content">
+          {(this.props.location.pathname === "/")?
+              <JobCount /> :
+            (this.props.location.pathname === "/add-job")?
+              <AddJobForm addNewJob={this.addJob} /> :
+              this.renderJobBoard()
+          }  
+        </div>
       </div>
     );
   }

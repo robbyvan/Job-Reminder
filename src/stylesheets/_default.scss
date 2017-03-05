@@ -1,0 +1,28 @@
+@charset "UTF-8";
+@import "variables";
+/*Global Styles*/
+html, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  font: inherit;
+}
+
+html {
+  font-family: $html-font;
+  font-size: $html-fontSize;
+  color: $html-text-color;
+  height: 100%;
+}
+
+body{
+  height: 100%;
+}
+
+a{
+  text-decoration: none;
+}
+a:visited{
+  color: $html-text-color;
+}

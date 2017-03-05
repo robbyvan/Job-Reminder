@@ -1,11 +1,13 @@
 import { Component, PropTypes } from 'react'
 
+require('./../stylesheets/JobBlock.scss');
+
 export class JobBlock extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      editing: false
+      editing: true
     };
 
     this.renderEdit = this.renderEdit.bind(this);
@@ -55,11 +57,15 @@ export class JobBlock extends Component {
 
     return (
         <div className="jobBlock">
-          <h2 ref="company">{this.props.company}</h2>
-          <h4 ref="appliedDate">{date.getMonth() + 1} / {date.getDate()} / {date.getFullYear()}</h4>
-          <h3 ref="position">{this.props.position}</h3>
-          <h3 ref="status">{this.props.status}</h3>
-          <a href={this.props.jobLink} ref="jobLink">Career Page</a>
+          <h2 className="company-display" ref="company">{this.props.company}</h2>
+          <h4 className="appliedDate-display" ref="appliedDate">{date.getMonth() + 1} / {date.getDate()} / {date.getFullYear()}</h4>
+          <h3 className="position-display" ref="position">{this.props.position}</h3>
+          <h3 className="status-display" ref="status">{this.props.status}</h3>
+          <a  className="jobLink-display" 
+              href={this.props.jobLink} 
+              ref="jobLink">
+                Career Page
+          </a>
           <button className="editJob" onClick={this.handleEdit}>Edit</button>
           <button className="removeJob" onClick={this.handleRemove}>Remove</button>
         </div>
@@ -71,31 +77,45 @@ export class JobBlock extends Component {
 
     return (
         <div className="jobBlock">
-          <input  type="text" 
+          <input  type="text"
+                  placeholder="Company" 
                   ref="company" 
-                  defaultValue={this.props.company} 
+                  defaultValue={this.props.company}
+                  className="company-input"
+                  required 
           />
 
           <input  type="text" 
+                  placeholder="Applied Date"
                   ref="appliedDate" 
                   defaultValue={
                     date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear()
-                  } 
+                  }
+                  className="appliedDate-input"
+                  required 
           />
 
           <input  type="text" 
+                  placeholder="Applied Postion"
                   ref="position"
-                  defaultValue={this.props.position} 
+                  defaultValue={this.props.position}
+                  className="position-input" 
+                  required
           />
 
           <input  type="text" 
                   ref="status" 
-                  defaultValue={this.props.status} 
+                  defaultValue={this.props.status}
+                  className="status-input"
+                  required 
           />
 
           <input  type="text" 
+                  placeholder="Application Status"
                   ref="jobLink" 
                   defaultValue={this.props.jobLink}
+                  className="jobLink-input"
+                  required
           />
           
           <button className="saveJob" onClick={this.handleSave}>Save</button>

@@ -1,0 +1,18 @@
+@import "default";
+@import "menu";
+
+.app-container {
+  position: absolute;
+  width: 100%;
+  .app-name {
+    font-size: 3em;
+    text-align: center;
+    margin-top: 140px;
+    color: $title-color;
+  }
+}
+
+
+.page-content {
+  display: block;
+}

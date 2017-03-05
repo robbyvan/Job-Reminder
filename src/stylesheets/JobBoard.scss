@@ -1,0 +1,23 @@
+@import "default";
+
+.job-board {
+  margin-top: 40px;
+}
+
+.job-board {
+  h1 {
+    font-size: 2em;
+  }
+  .job-panel {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
+.no-job-msg {
+    text-align: center;
+    margin-top: 50px;
+    color: $main-color;
+    font-size: 2em;
+  }

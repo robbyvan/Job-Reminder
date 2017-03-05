@@ -1,0 +1,21 @@
+@import "default";
+
+.menu {
+  position: fixed;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  height: 100px;
+  width: 100%;
+  font-size: 5em;
+  background-color: $main-color;
+  .menu-home a{
+    color: #fff;
+  }
+  .menu-list {
+    @extend .menu-home;
+  }
+  .menu-add {
+    @extend .menu-home;
+  }
+}
