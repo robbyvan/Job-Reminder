@@ -54,7 +54,7 @@
 
 	var _App = __webpack_require__(178);
 
-	var _Whoops = __webpack_require__(247);
+	var _Whoops = __webpack_require__(259);
 
 	var _reactRouter = __webpack_require__(180);
 
@@ -21524,15 +21524,17 @@
 
 	var _JobCount = __webpack_require__(239);
 
-	var _JobBoard = __webpack_require__(244);
+	var _JobBoard = __webpack_require__(248);
 
-	var _AddJobForm = __webpack_require__(246);
+	var _AddJobForm = __webpack_require__(254);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(257);
 
 	var App = exports.App = function (_Component) {
 	  _inherits(App, _Component);
@@ -21547,25 +21549,25 @@
 	        company: 'Alibaba',
 	        appliedDate: new Date('3/1/2017'),
 	        position: 'Front-End Engineer',
-	        status: 'pending',
+	        status: 'Pending',
 	        jobLink: 'aliLink'
 	      }, {
 	        company: 'Yahoo',
 	        appliedDate: new Date('2/15/2017'),
 	        position: '2017 Summer Intern',
-	        status: 'pending',
+	        status: 'Pending',
 	        jobLink: 'YahooCareer'
 	      }, {
 	        company: 'LiveRamp',
 	        appliedDate: new Date('2/15/2017'),
 	        position: 'Software Engineer',
-	        status: 'replied',
+	        status: 'Replied',
 	        jobLink: 'LRCareer'
 	      }, {
 	        company: 'Redfin',
 	        appliedDate: new Date('2/10/2017'),
 	        position: 'Software Engineer',
-	        status: 'delclined',
+	        status: 'Delclined',
 	        jobLink: 'RFCareer'
 	      }]
 	    };
@@ -21619,13 +21621,17 @@
 	      return React.createElement(
 	        'div',
 	        { className: 'app-container' },
+	        React.createElement(_Menu.Menu, null),
 	        React.createElement(
 	          'h1',
-	          null,
+	          { className: 'app-name' },
 	          'Job Application Reminder'
 	        ),
-	        React.createElement(_Menu.Menu, null),
-	        this.props.location.pathname === "/" ? React.createElement(_JobCount.JobCount, null) : this.props.location.pathname === "/add-job" ? React.createElement(_AddJobForm.AddJobForm, { addNewJob: this.addJob }) : this.renderJobBoard()
+	        React.createElement(
+	          'div',
+	          { className: 'page-content' },
+	          this.props.location.pathname === "/" ? React.createElement(_JobCount.JobCount, null) : this.props.location.pathname === "/add-job" ? React.createElement(_AddJobForm.AddJobForm, { addNewJob: this.addJob }) : this.renderJobBoard()
+	        )
 	      );
 	    }
 	  }]);
@@ -21667,19 +21673,31 @@
 	    'div',
 	    { className: 'menu' },
 	    React.createElement(
-	      _reactRouter.Link,
-	      { to: '/' },
-	      React.createElement(_home2.default, null)
+	      'div',
+	      { className: 'menu-home' },
+	      React.createElement(
+	        _reactRouter.Link,
+	        { to: '/' },
+	        React.createElement(_home2.default, null)
+	      )
 	    ),
 	    React.createElement(
-	      _reactRouter.Link,
-	      { to: '/job-list' },
-	      React.createElement(_listAlt2.default, null)
+	      'div',
+	      { className: 'menu-list' },
+	      React.createElement(
+	        _reactRouter.Link,
+	        { to: '/job-list' },
+	        React.createElement(_listAlt2.default, null)
+	      )
 	    ),
 	    React.createElement(
-	      _reactRouter.Link,
-	      { to: '/add-job' },
-	      React.createElement(_pencil2.default, null)
+	      'div',
+	      { className: 'menu-add' },
+	      React.createElement(
+	        _reactRouter.Link,
+	        { to: '/add-job' },
+	        React.createElement(_pencil2.default, null)
+	      )
 	    )
 	  );
 	};
@@ -26930,6 +26948,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	__webpack_require__(244);
+
 	var JobCount = exports.JobCount = function (_Component) {
 	  _inherits(JobCount, _Component);
 
@@ -26945,33 +26965,53 @@
 	      return React.createElement(
 	        'div',
 	        { className: 'jobCount-container' },
-	        React.createElement(_paperPlaneO2.default, null),
 	        React.createElement(
-	          'h1',
+	          'div',
 	          { className: 'totalJobs' },
-	          'Total ',
-	          this.props.total
+	          React.createElement(_paperPlaneO2.default, null),
+	          React.createElement(
+	            'h1',
+	            null,
+	            'Total ',
+	            this.props.total
+	          )
 	        ),
-	        React.createElement(_calendarCheckO2.default, null),
 	        React.createElement(
-	          'h2',
-	          { className: 'repliedJobs' },
-	          'Replied ',
-	          this.props.replied
-	        ),
-	        React.createElement(_calendarO2.default, null),
-	        React.createElement(
-	          'h2',
-	          { className: 'pendingJobs' },
-	          'Pending ',
-	          this.props.pending
-	        ),
-	        React.createElement(_calendarTimesO2.default, null),
-	        React.createElement(
-	          'h2',
-	          { className: 'declinedJobs' },
-	          'Declined ',
-	          this.props.declined
+	          'div',
+	          { className: 'jobStatus' },
+	          React.createElement(
+	            'div',
+	            { className: 'repliedJobs' },
+	            React.createElement(_calendarCheckO2.default, null),
+	            React.createElement(
+	              'h2',
+	              null,
+	              'Replied ',
+	              this.props.replied
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'pendingJobs' },
+	            React.createElement(_calendarO2.default, null),
+	            React.createElement(
+	              'h2',
+	              null,
+	              'Pending ',
+	              this.props.pending
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'declinedJobs' },
+	            React.createElement(_calendarTimesO2.default, null),
+	            React.createElement(
+	              'h2',
+	              null,
+	              'Declined ',
+	              this.props.declined
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -27146,6 +27186,354 @@
 /* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(245);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(247)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./JobCount.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./JobCount.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(246)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.jobCount-container .totalJobs {\n  font-size: 2.8em;\n  text-align: center;\n  border: 1px solid gray;\n  padding: 20px;\n  border-radius: 10px;\n  width: 300px;\n  margin: 40px auto; }\n\n.jobCount-container .jobStatus {\n  display: flex;\n  justify-content: space-around;\n  flex-wrap: wrap; }\n\n.jobCount-container .repliedJobs, .jobCount-container .pendingJobs, .jobCount-container .declinedJobs {\n  font-size: 2em;\n  margin: 40px 20px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 20px;\n  border-radius: 10px;\n  background-color: #9DBF9F; }\n  .jobCount-container .repliedJobs h2, .jobCount-container .pendingJobs h2, .jobCount-container .declinedJobs h2 {\n    padding: 10px; }\n\n.jobCount-container .pendingJobs {\n  background-color: #A3BFBF; }\n\n.jobCount-container .declinedJobs {\n  background-color: #D97059; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 246 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		var blob = new Blob([css], { type: "text/css" });
+
+		var oldSrc = linkElement.href;
+
+		linkElement.href = URL.createObjectURL(blob);
+
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -27159,13 +27547,15 @@
 
 	var _react = __webpack_require__(1);
 
-	var _JobBlock = __webpack_require__(245);
+	var _JobBlock = __webpack_require__(249);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(252);
 
 	var JobBoard = exports.JobBoard = function (_Component) {
 	  _inherits(JobBoard, _Component);
@@ -27189,13 +27579,8 @@
 	        'div',
 	        { className: 'job-board' },
 	        React.createElement(
-	          'h1',
-	          null,
-	          'Current Applications'
-	        ),
-	        React.createElement(
 	          'div',
-	          { className: 'job-blocks' },
+	          { className: 'job-panel' },
 	          this.props.myJobs.map(function (job, i) {
 	            return React.createElement(_JobBlock.JobBlock, _extends({ key: i,
 	              index: i
@@ -27209,8 +27594,8 @@
 	      //else, currently no job applications
 	      React.createElement(
 	        'h1',
-	        { className: 'no-job' },
-	        'No applications now'
+	        { className: 'no-job-msg' },
+	        'Whoops, you don\'t have any job applications.'
 	      );
 	    }
 	  }]);
@@ -27229,7 +27614,7 @@
 	};
 
 /***/ },
-/* 245 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27248,6 +27633,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(250);
 
 	var JobBlock = exports.JobBlock = function (_Component) {
 	  _inherits(JobBlock, _Component);
@@ -27314,12 +27701,12 @@
 	        { className: 'jobBlock' },
 	        React.createElement(
 	          'h2',
-	          { ref: 'company' },
+	          { className: 'company-display', ref: 'company' },
 	          this.props.company
 	        ),
 	        React.createElement(
 	          'h4',
-	          { ref: 'appliedDate' },
+	          { className: 'appliedDate-display', ref: 'appliedDate' },
 	          date.getMonth() + 1,
 	          ' / ',
 	          date.getDate(),
@@ -27328,17 +27715,19 @@
 	        ),
 	        React.createElement(
 	          'h3',
-	          { ref: 'position' },
+	          { className: 'position-display', ref: 'position' },
 	          this.props.position
 	        ),
 	        React.createElement(
 	          'h3',
-	          { ref: 'status' },
+	          { className: 'status-display', ref: 'status' },
 	          this.props.status
 	        ),
 	        React.createElement(
 	          'a',
-	          { href: this.props.jobLink, ref: 'jobLink' },
+	          { className: 'jobLink-display',
+	            href: this.props.jobLink,
+	            ref: 'jobLink' },
 	          'Career Page'
 	        ),
 	        React.createElement(
@@ -27362,24 +27751,38 @@
 	        'div',
 	        { className: 'jobBlock' },
 	        React.createElement('input', { type: 'text',
+	          placeholder: 'Company',
 	          ref: 'company',
-	          defaultValue: this.props.company
+	          defaultValue: this.props.company,
+	          className: 'company-input',
+	          required: true
 	        }),
 	        React.createElement('input', { type: 'text',
+	          placeholder: 'Applied Date',
 	          ref: 'appliedDate',
-	          defaultValue: date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear()
+	          defaultValue: date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear(),
+	          className: 'appliedDate-input',
+	          required: true
 	        }),
 	        React.createElement('input', { type: 'text',
+	          placeholder: 'Applied Postion',
 	          ref: 'position',
-	          defaultValue: this.props.position
+	          defaultValue: this.props.position,
+	          className: 'position-input',
+	          required: true
 	        }),
 	        React.createElement('input', { type: 'text',
 	          ref: 'status',
-	          defaultValue: this.props.status
+	          defaultValue: this.props.status,
+	          className: 'status-input',
+	          required: true
 	        }),
 	        React.createElement('input', { type: 'text',
+	          placeholder: 'Application Status',
 	          ref: 'jobLink',
-	          defaultValue: this.props.jobLink
+	          defaultValue: this.props.jobLink,
+	          className: 'jobLink-input',
+	          required: true
 	        }),
 	        React.createElement(
 	          'button',
@@ -27413,7 +27816,87 @@
 	};
 
 /***/ },
-/* 246 */
+/* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(251);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(247)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./JobBlock.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./JobBlock.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(246)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.jobBlock {\n  box-sizing: border-box;\n  box-shadow: 2px 2px 2px 2px #C3C3C3;\n  width: 270px;\n  height: 300px;\n  margin: 10px;\n  background-color: #F8EBE3;\n  color: #787E8A; }\n  .jobBlock button {\n    border: none;\n    border-radius: 4px;\n    width: 100px;\n    height: 30px;\n    font-size: 1em;\n    color: #fff; }\n  .jobBlock button:hover {\n    cursor: pointer; }\n\n.jobBlock {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap; }\n  .jobBlock a {\n    display: block;\n    text-align: center;\n    color: #787E8A; }\n  .jobBlock h2, .jobBlock h3, .jobBlock h4, .jobBlock a, .jobBlock button {\n    margin: 8px auto; }\n  .jobBlock h2 {\n    font-size: 1.8em; }\n  .jobBlock h4 {\n    font-size: 1em;\n    text-align: right; }\n  .jobBlock .position-display {\n    font-size: 1.2em;\n    text-align: center; }\n  .jobBlock .status-display {\n    text-align: center;\n    font-size: 1.5em; }\n  .jobBlock .editJob, .jobBlock .saveJob {\n    background-color: #A3BFBF; }\n  .jobBlock .removeJob {\n    background-color: #D97059; }\n\n.jobBlock input {\n  height: 30px;\n  margin: 5px;\n  line-height: 30px;\n  font-size: .7em;\n  padding-left: 5px; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 252 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(253);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(247)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./JobBoard.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./JobBoard.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(246)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.job-board {\n  margin-top: 40px; }\n\n.job-board h1 {\n  font-size: 2em; }\n\n.job-board .job-panel {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap; }\n\n.no-job-msg {\n  text-align: center;\n  margin-top: 50px;\n  color: #A3BFBF;\n  font-size: 2em; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27432,6 +27915,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(255);
 
 	var AddJobForm = exports.AddJobForm = function (_Component) {
 	  _inherits(AddJobForm, _Component);
@@ -27464,7 +27949,7 @@
 	    value: function render() {
 	      return React.createElement(
 	        'form',
-	        { onSubmit: this.handleSubmit, className: 'add-job' },
+	        { className: 'add-job-form' },
 	        React.createElement(
 	          'label',
 	          { htmlFor: 'company' },
@@ -27522,7 +28007,7 @@
 	        }),
 	        React.createElement(
 	          'button',
-	          null,
+	          { onClick: this.handleSubmit },
 	          'Add to Application Reminder'
 	        )
 	      );
@@ -27549,7 +28034,87 @@
 	};
 
 /***/ },
-/* 247 */
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(256);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(247)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./AddJobForm.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./AddJobForm.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(246)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.add-job-form {\n  width: 80%;\n  margin: 40px auto;\n  display: flex;\n  flex-direction: column; }\n\n.add-job-form label, .add-job-form button {\n  margin-top: 20px;\n  font-size: .9em; }\n\n.add-job-form input {\n  font-size: .9em;\n  margin-top: 8px;\n  box-sizing: border-box;\n  height: 40px;\n  line-height: 40px;\n  padding-left: 10px; }\n\n.add-job-form button {\n  border: none;\n  height: 40px;\n  background-color: #9DBF9F;\n  color: #333; }\n\n.add-job-form button:hover {\n  cursor: pointer; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(258);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(247)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./app.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./app.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(246)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.menu {\n  position: fixed;\n  margin: 0;\n  display: flex;\n  justify-content: space-around;\n  height: 100px;\n  width: 100%;\n  font-size: 5em;\n  background-color: #A3BFBF; }\n  .menu .menu-home a, .menu .menu-list a, .menu .menu-add a {\n    color: #fff; }\n\n.app-container {\n  position: absolute;\n  width: 100%; }\n  .app-container .app-name {\n    font-size: 3em;\n    text-align: center;\n    margin-top: 140px;\n    color: #D97059; }\n\n.page-content {\n  display: block; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

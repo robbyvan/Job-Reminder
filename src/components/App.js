@@ -17,28 +17,28 @@ export class App extends Component {
           company: 'Alibaba',
           appliedDate: new Date('3/1/2017'),
           position: 'Front-End Engineer',
-          status: 'pending',
+          status: 'Pending',
           jobLink: 'aliLink'
         },
         {
           company: 'Yahoo',
           appliedDate: new Date('2/15/2017'),
           position: '2017 Summer Intern',
-          status: 'pending',
+          status: 'Pending',
           jobLink: 'YahooCareer'
         },
         {
           company: 'LiveRamp',
           appliedDate: new Date('2/15/2017'),
           position: 'Software Engineer',
-          status: 'replied',
+          status: 'Replied',
           jobLink: 'LRCareer'
         },
         {
           company: 'Redfin',
           appliedDate: new Date('2/10/2017'),
           position: 'Software Engineer',
-          status: 'delclined',
+          status: 'Delclined',
           jobLink: 'RFCareer'
         }
       ]
