@@ -25,7 +25,7 @@ export class JobBlock extends Component {
   }
 
   handleSave() {
-
+    console.log(new Date(this.refs.appliedDate.value));
     let newInfo = {
       company: this.refs.company.value,
       appliedDate: new Date(this.refs.appliedDate.value),
@@ -82,17 +82,15 @@ export class JobBlock extends Component {
                   ref="company" 
                   defaultValue={this.props.company}
                   className="company-input"
-                  required 
           />
 
-          <input  type="text" 
+          <input  type="date" 
                   placeholder="Applied Date"
                   ref="appliedDate" 
                   defaultValue={
-                    date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear()
+                    date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()
                   }
                   className="appliedDate-input"
-                  required 
           />
 
           <input  type="text" 
@@ -100,14 +98,12 @@ export class JobBlock extends Component {
                   ref="position"
                   defaultValue={this.props.position}
                   className="position-input" 
-                  required
           />
 
           <input  type="text" 
                   ref="status" 
                   defaultValue={this.props.status}
                   className="status-input"
-                  required 
           />
 
           <input  type="text" 
@@ -115,7 +111,6 @@ export class JobBlock extends Component {
                   ref="jobLink" 
                   defaultValue={this.props.jobLink}
                   className="jobLink-input"
-                  required
           />
           
           <button className="saveJob" onClick={this.handleSave}>Save</button>
@@ -134,10 +129,10 @@ export class JobBlock extends Component {
 }
 
 JobBlock.propTypes = {
-    company: PropTypes.string.isRequired,
-    appliedDate: PropTypes.instanceOf(Date).isRequired,
-    status: PropTypes.string.isRequired,
-    jobLink: PropTypes.string.isRequired
+  
+  
+  
+  
 };
 
 JobBlock.defaultProps = {

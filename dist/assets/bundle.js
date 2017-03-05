@@ -27667,7 +27667,7 @@
 	  }, {
 	    key: 'handleSave',
 	    value: function handleSave() {
-
+	      console.log(new Date(this.refs.appliedDate.value));
 	      var newInfo = {
 	        company: this.refs.company.value,
 	        appliedDate: new Date(this.refs.appliedDate.value),
@@ -27754,35 +27754,30 @@
 	          placeholder: 'Company',
 	          ref: 'company',
 	          defaultValue: this.props.company,
-	          className: 'company-input',
-	          required: true
+	          className: 'company-input'
 	        }),
-	        React.createElement('input', { type: 'text',
+	        React.createElement('input', { type: 'date',
 	          placeholder: 'Applied Date',
 	          ref: 'appliedDate',
-	          defaultValue: date.getMonth() + 1 + '-' + date.getDate() + '-' + date.getFullYear(),
-	          className: 'appliedDate-input',
-	          required: true
+	          defaultValue: date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear(),
+	          className: 'appliedDate-input'
 	        }),
 	        React.createElement('input', { type: 'text',
 	          placeholder: 'Applied Postion',
 	          ref: 'position',
 	          defaultValue: this.props.position,
-	          className: 'position-input',
-	          required: true
+	          className: 'position-input'
 	        }),
 	        React.createElement('input', { type: 'text',
 	          ref: 'status',
 	          defaultValue: this.props.status,
-	          className: 'status-input',
-	          required: true
+	          className: 'status-input'
 	        }),
 	        React.createElement('input', { type: 'text',
 	          placeholder: 'Application Status',
 	          ref: 'jobLink',
 	          defaultValue: this.props.jobLink,
-	          className: 'jobLink-input',
-	          required: true
+	          className: 'jobLink-input'
 	        }),
 	        React.createElement(
 	          'button',
@@ -27801,12 +27796,7 @@
 	  return JobBlock;
 	}(_react.Component);
 
-	JobBlock.propTypes = {
-	  company: _react.PropTypes.string.isRequired,
-	  appliedDate: _react.PropTypes.instanceOf(Date).isRequired,
-	  status: _react.PropTypes.string.isRequired,
-	  jobLink: _react.PropTypes.string.isRequired
-	};
+	JobBlock.propTypes = {};
 
 	JobBlock.defaultProps = {
 	  company: 'Default',
@@ -27957,7 +27947,6 @@
 	        ),
 	        React.createElement('input', { id: 'company',
 	          type: 'text',
-	          required: true,
 	          placeholder: 'Company',
 	          ref: 'company'
 	        }),
@@ -27968,7 +27957,6 @@
 	        ),
 	        React.createElement('input', { id: 'position',
 	          type: 'text',
-	          required: true,
 	          placeholder: 'Position',
 	          ref: 'position'
 	        }),
@@ -27979,8 +27967,7 @@
 	        ),
 	        React.createElement('input', { id: 'appliedDate',
 	          type: 'date',
-	          required: true,
-	          placeholder: 'mm-dd-yyyy',
+	          placeholder: 'mm/dd/yyyy',
 	          ref: 'appliedDate'
 	        }),
 	        React.createElement(
@@ -27990,7 +27977,6 @@
 	        ),
 	        React.createElement('input', { id: 'status',
 	          type: 'text',
-	          required: true,
 	          placeholder: 'Current Status',
 	          ref: 'status'
 	        }),
@@ -28001,7 +27987,6 @@
 	        ),
 	        React.createElement('input', { id: 'jobLink',
 	          type: 'text',
-	          required: true,
 	          placeholder: 'Career page',
 	          ref: 'jobLink'
 	        }),
@@ -28027,8 +28012,7 @@
 
 	AddJobForm.propTypes = {
 	  company: _react.PropTypes.string.isRequired,
-	  position: _react.PropTypes.string.isRequired,
-	  appliedDate: _react.PropTypes.string.isRequired,
+	  appliedDate: _react.PropTypes.instanceOf(Date).isRequired,
 	  status: _react.PropTypes.string.isRequired,
 	  jobLink: _react.PropTypes.string.isRequired
 	};

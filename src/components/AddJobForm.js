@@ -29,7 +29,6 @@ export class AddJobForm extends Component {
         <label htmlFor="company">Company</label>
         <input id="company"
                type="text"
-               required
                placeholder="Company"
                ref="company"
         />
@@ -37,7 +36,6 @@ export class AddJobForm extends Component {
         <label htmlFor="position">Position</label>
         <input id="position"
                type="text"
-               required
                placeholder="Position"
                ref="position"
         />
@@ -45,15 +43,13 @@ export class AddJobForm extends Component {
         <label htmlFor="appliedDate">Applied Date</label>
         <input id="appliedDate"
                type="date"
-               required
-               placeholder="mm-dd-yyyy"
+               placeholder="mm/dd/yyyy"
                ref="appliedDate"
         />
 
         <label htmlFor="status">Current Status</label>
         <input id="status"
                type="text"
-               required
                placeholder="Current Status"
                ref="status"
         />
@@ -61,7 +57,6 @@ export class AddJobForm extends Component {
         <label htmlFor="jobLink">Job Link</label>
         <input id="jobLink"
                type="text"
-               required
                placeholder="Career page"
                ref="jobLink"
         />
@@ -70,7 +65,6 @@ export class AddJobForm extends Component {
       </form>
     );
   }
-
 }
 
 AddJobForm.defaultProps = {
@@ -83,8 +77,7 @@ AddJobForm.defaultProps = {
 
 AddJobForm.propTypes = {
   company: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired,
-  appliedDate: PropTypes.string.isRequired,
+  appliedDate: PropTypes.instanceOf(Date).isRequired,
   status: PropTypes.string.isRequired,
   jobLink: PropTypes.string.isRequired
 }
