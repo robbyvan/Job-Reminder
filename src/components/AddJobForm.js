@@ -34,6 +34,7 @@ export const AddJobForm = ({company,
         <input id="company"
                type="text"
                placeholder="Company"
+               defaultValue={company}
                ref={input => _company = input}
         />
 
@@ -41,6 +42,7 @@ export const AddJobForm = ({company,
         <input id="position"
                type="text"
                placeholder="Position"
+               defaultValue={position}
                ref={input => _position = input}
         />
 
@@ -48,6 +50,7 @@ export const AddJobForm = ({company,
         <input id="appliedDate"
                type="date"
                placeholder="mm/dd/yyyy"
+               defaultValue={appliedDate}
                ref={input => _appliedDate = input}
         />
 
@@ -55,6 +58,7 @@ export const AddJobForm = ({company,
         <input id="status"
                type="text"
                placeholder="Current Status"
+               defaultValue={status}
                ref={input => _status = input}
         />
 
@@ -62,6 +66,7 @@ export const AddJobForm = ({company,
         <input id="jobLink"
                type="text"
                placeholder="Career page"
+               defaultValue={jobLink}
                ref={input => _jobLink = input}
         />
 
@@ -74,11 +79,11 @@ export const AddJobForm = ({company,
 
 
 AddJobForm.defaultProps = {
-  company: 'Alibaba',
+  company: '',
   position: 'Front-End Developer',
-  appliedDate: '2017-03-04',
-  status: 'replied',
-  jobLink: 'https://campus.alibaba.com/traineePositions.htm?refno=11762'
+  appliedDate: '',
+  status: 'Pending',
+  jobLink: ''
 }
 
 AddJobForm.propTypes = {
