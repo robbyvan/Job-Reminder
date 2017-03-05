@@ -25,10 +25,10 @@ export class JobBlock extends Component {
   }
 
   handleSave() {
-    console.log(new Date(this.refs.appliedDate.value));
+    // console.log(new Date(this.refs.appliedDate.value));
     let newInfo = {
       company: this.refs.company.value,
-      appliedDate: new Date(this.refs.appliedDate.value),
+      appliedDate: this.refs.appliedDate.value,
       position: this.refs.position.value,
       status: this.refs.status.value,
       jobLink: this.refs.jobLink.value
@@ -58,7 +58,7 @@ export class JobBlock extends Component {
     return (
         <div className="jobBlock">
           <h2 className="company-display" ref="company">{this.props.company}</h2>
-          <h4 className="appliedDate-display" ref="appliedDate">{date.getMonth() + 1} / {date.getDate()} / {date.getFullYear()}</h4>
+          <h4 className="appliedDate-display" ref="appliedDate">{this.props.appliedDate}</h4>
           <h3 className="position-display" ref="position">{this.props.position}</h3>
           <h3 className="status-display" ref="status">{this.props.status}</h3>
           <a  className="jobLink-display" 
@@ -88,7 +88,7 @@ export class JobBlock extends Component {
                   placeholder="Applied Date"
                   ref="appliedDate" 
                   defaultValue={
-                    date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()
+                    this.props.appliedDate
                   }
                   className="appliedDate-input"
           />
@@ -129,15 +129,15 @@ export class JobBlock extends Component {
 }
 
 JobBlock.propTypes = {
-  
-  
-  
-  
+  company: PropTypes.string.isRequired,
+  appliedDate: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  jobLink: PropTypes.string.isRequired
 };
 
 JobBlock.defaultProps = {
   company: 'Default',
-  appliedDate: new Date(),
+  appliedDate: 'mm-dd-yyyy',
   status: 'replied',
   jobLink: '#'
 };

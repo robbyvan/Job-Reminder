@@ -15,28 +15,28 @@ export class App extends Component {
       jobs: [
         {
           company: 'Alibaba',
-          appliedDate: new Date('3/1/2017'),
+          appliedDate: '03-01-2017',
           position: 'Front-End Engineer',
           status: 'Pending',
           jobLink: 'aliLink'
         },
         {
           company: 'Yahoo',
-          appliedDate: new Date('2/15/2017'),
+          appliedDate: '02-15-2017',
           position: '2017 Summer Intern',
           status: 'Pending',
           jobLink: 'YahooCareer'
         },
         {
           company: 'LiveRamp',
-          appliedDate: new Date('2/15/2017'),
+          appliedDate: '02-15-2017',
           position: 'Software Engineer',
           status: 'Replied',
           jobLink: 'LRCareer'
         },
         {
           company: 'Redfin',
-          appliedDate: new Date('2/10/2017'),
+          appliedDate: '02-10-2017',
           position: 'Software Engineer',
           status: 'Delclined',
           jobLink: 'RFCareer'
@@ -91,7 +91,7 @@ export class App extends Component {
         <h1 className="app-name">Job Application Reminder</h1>
         <div className="page-content">
           {(this.props.location.pathname === "/")?
-              <JobCount /> :
+              <JobCount jobs={this.state.jobs}/> :
             (this.props.location.pathname === "/add-job")?
               <AddJobForm addNewJob={this.addJob} /> :
               this.renderJobBoard()

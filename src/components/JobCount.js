@@ -12,24 +12,34 @@ export class JobCount extends Component {
   }
 
   render() {
+    let jobs = this.props.jobs;
+    let totalSum, repliedSum, pendingSum, declinedSum;
+    totalSum = repliedSum = pendingSum = declinedSum = 0;
+    for (let i = 0; i < jobs.length; ++i){
+      totalSum += 1;
+      (jobs[i].status === "Replied")? repliedSum += 1 :
+        (jobs[i].status === "Pending")? pendingSum +=1 : 
+          declinedSum += 1;
+    }
+
     return (
       <div className="jobCount-container">
         <div className="totalJobs">
           <PaperPlane />
-          <h1>Total {this.props.total}</h1>
+          <h1>Total {totalSum}</h1>
         </div>
         <div className="jobStatus">
           <div className="repliedJobs">
             <RepliedJob />
-            <h2>Replied {this.props.replied}</h2>
+            <h2>Replied {repliedSum}</h2>
           </div>
           <div className="pendingJobs">
             <PendingJob />
-            <h2>Pending {this.props.pending}</h2>
+            <h2>Pending {pendingSum}</h2>
           </div>
           <div className="declinedJobs">
             <DeclinedJob />
-            <h2>Declined {this.props.declined}</h2>
+            <h2>Declined {declinedSum}</h2>
           </div>
         </div>
         
