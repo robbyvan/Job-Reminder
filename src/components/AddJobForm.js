@@ -1,5 +1,7 @@
 import { Component, PropTypes } from 'react'
 
+require('./../stylesheets/AddJobForm.scss');
+
 export class AddJobForm extends Component {
 
   constructor(props) {
@@ -22,7 +24,7 @@ export class AddJobForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="add-job">
+      <form className="add-job-form">
 
         <label htmlFor="company">Company</label>
         <input id="company"
@@ -64,7 +66,7 @@ export class AddJobForm extends Component {
                ref="jobLink"
         />
 
-        <button>Add to Application Reminder</button>
+        <button onClick={this.handleSubmit}>Add to Application Reminder</button>
       </form>
     );
   }
