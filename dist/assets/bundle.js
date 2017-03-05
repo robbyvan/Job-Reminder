@@ -28117,7 +28117,7 @@
 /* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -28126,22 +28126,64 @@
 
 	var _reactRouter = __webpack_require__(180);
 
+	__webpack_require__(260);
+
 	var Whoops404 = exports.Whoops404 = function Whoops404() {
 	  return React.createElement(
-	    "div",
-	    { className: "whoops404" },
+	    'div',
+	    { className: 'whoops404' },
 	    React.createElement(
-	      "h1",
+	      'h1',
 	      null,
-	      "Whoops, nothing is here."
+	      'Whoops, nothing is here.'
 	    ),
 	    React.createElement(
 	      _reactRouter.Link,
-	      { to: "/" },
-	      "Back to homepage"
+	      { to: '/' },
+	      'Back to homepage'
 	    )
 	  );
 	};
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(261);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(247)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./whoops404.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./whoops404.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(246)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.whoops404 {\n  margin: 10% auto; }\n  .whoops404 h1, .whoops404 a {\n    display: block;\n    text-align: center; }\n  .whoops404 h1 {\n    font-size: 3em;\n    color: #A3BFBF; }\n  .whoops404 a {\n    margin-top: 50px;\n    color: #D97059;\n    text-decoration: underline; }\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

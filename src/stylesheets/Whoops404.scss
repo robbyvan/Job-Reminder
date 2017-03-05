@@ -1,0 +1,19 @@
+@import "default";
+
+.whoops404 {
+  // width: 400px;
+  margin: 10% auto;
+  h1, a {
+    display: block;
+    text-align: center;
+  }
+  h1 {
+    font-size: 3em;
+    color: $main-color;
+  }
+  a {
+    margin-top: 50px;
+    color: $title-color;
+    text-decoration: underline;
+  }
+}
