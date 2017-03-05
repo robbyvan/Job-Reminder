@@ -4,8 +4,7 @@
   box-sizing: border-box;
   box-shadow: 2px 2px 2px 2px $shadow-color;
   width: 270px;
-  height: 300px;
-  // padding: 15px;
+  height: 320px; 
   margin: 10px;
   background-color: $jobBlock-color;
   color: $blockText-color;
@@ -25,6 +24,7 @@
 .jobBlock {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   flex-wrap: nowrap;
   a {
     display: block;
