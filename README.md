@@ -6,7 +6,7 @@ This App is based on React.js, to help me remember positions I've applied for.<b
 
 [Job Reminder Demo](https://robbyvan.github.io/Job-Reminder/dist/#/)
 
-![](./screenshots/home.jpeg)
+![](./screenshots/homepage.jpeg)
 ![](./screenshots/list.jpeg)
 ![](./screenshots/add.jpeg)
 ![](./screenshots/confirm.jpeg)
