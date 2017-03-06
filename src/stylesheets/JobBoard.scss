@@ -1,7 +1,10 @@
 @import "default";
 
 .job-board {
-  margin-top: 40px;
+  margin: 40px auto;
+  display: block;
+  overflow: hidden;
+  background-color: pink;
 }
 
 .job-board {
@@ -16,7 +19,7 @@
       padding: 20px;
     }
     .alljobs {
-      color: #EDD28C;
+      color: $selected-color;
     }
     .replied-filter{
       color: $replied-color;
@@ -30,8 +33,8 @@
   }
   .job-panel {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: center;
   }
 }
 

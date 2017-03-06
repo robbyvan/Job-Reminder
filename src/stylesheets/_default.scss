@@ -16,6 +16,12 @@ html {
   height: 100%;
 }
 
+::selection {
+  background-color: $main-color;
+  color: #FFF;
+  text-shadow: none;
+}
+
 body{
   height: 100%;
 }

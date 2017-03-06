@@ -52,7 +52,11 @@ export class JobBoard extends Component {
                                         removeFromBoard={this.props.removeFromBoard}
                               />
                   )
-                }  
+                }
+                <div className="jobBlock"></div>
+                <div className="jobBlock"></div>
+                <div className="jobBlock"></div>
+                <div className="jobBlock"></div>
             </div>
         </div>) :
         //else, currently no job applications

@@ -22,6 +22,7 @@
 }
 
 .jobBlock {
+  align-self: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -58,9 +59,6 @@
   .removeJob {
     background-color: $title-color;
   }
-}
-
-.jobBlock {
   input {
     height: 30px;
     margin: 5px;
@@ -68,4 +66,8 @@
     font-size: .7em;
     padding-left: 5px;
   } 
+  &:empty {
+    height: 0;
+    box-shadow: none;
+  }
 }
