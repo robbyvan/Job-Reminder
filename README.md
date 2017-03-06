@@ -1,4 +1,7 @@
 # Job-Reminder
 A simple app practicing React.js
+
 # Description
-[Demo](https://robbyvan.github.io/Job-Reminder/dist/#/)
+This App is based on React.js, to help me remember positions I've applied for.<br />
+
+[Job Reminder Demo](https://robbyvan.github.io/Job-Reminder/dist/#/)
