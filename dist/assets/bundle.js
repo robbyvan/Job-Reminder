@@ -27717,7 +27717,7 @@
 	      this.props.myJobs.length ? React.createElement(
 	        'h1',
 	        { className: 'no-job-msg' },
-	        'Whoops, nothing is here.'
+	        'Whoops, 404.'
 	      ) :
 	      //else, currently no job applications
 	      React.createElement(

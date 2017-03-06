@@ -62,13 +62,12 @@ export class JobBoard extends Component {
         //No such filter
         (this.props.myJobs.length)?
         (<h1 className="no-job-msg">
-          Whoops, nothing is here.
+          Whoops, 404.
           </h1>) :
         //else, currently no job applications
         (<h1 className="no-job-msg">
           Whoops, you don't have any job applications.
           </h1>)
-
     );
   }
 }
