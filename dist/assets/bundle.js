@@ -21509,7 +21509,7 @@
 /* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(__dirname) {'use strict';
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -21592,10 +21592,7 @@
 	      var _this2 = this;
 
 	      this.setState({ loading: true });
-	      console.log(__dirname);
-	      var url =  false ? 'https://robbyvan.github.io/Job-Reminder/dist/data/applications.json' : './../data/applications.json';
-	      console.log(url);
-	      getAllJobs('GET', url).then(function (res) {
+	      getAllJobs('GET', 'https://robbyvan.github.io/Job-Reminder/dist/data/applications.json').then(function (res) {
 	        var allJobs = JSON.parse(res);
 	        console.log(allJobs);
 	        _this2.setState({ jobs: allJobs, loading: false });
@@ -21662,7 +21659,6 @@
 
 	  return App;
 	}(_react.Component);
-	/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ },
 /* 179 */

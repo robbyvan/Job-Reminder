@@ -55,10 +55,7 @@ export class App extends Component {
 
   componentDidMount() {
     this.setState({loading: true});
-    console.log(__dirname);
-    let url = (__dirname === 'localhost:3000')? 'https://robbyvan.github.io/Job-Reminder/dist/data/applications.json' : './../data/applications.json';
-    console.log(url);
-    getAllJobs('GET', url)
+    getAllJobs('GET', 'https://robbyvan.github.io/Job-Reminder/dist/data/applications.json')
       .then((res) => {
         let allJobs = JSON.parse(res);
         console.log(allJobs);
