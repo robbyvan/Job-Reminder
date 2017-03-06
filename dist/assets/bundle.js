@@ -21592,7 +21592,10 @@
 	      var _this2 = this;
 
 	      this.setState({ loading: true });
-	      getAllJobs('GET', __dirname + 'data/applications.json').then(function (res) {
+	      console.log(__dirname);
+	      var url =  false ? 'https://robbyvan.github.io/Job-Reminder/dist/data/applications.json' : './../data/applications.json';
+	      console.log(url);
+	      getAllJobs('GET', url).then(function (res) {
 	        var allJobs = JSON.parse(res);
 	        console.log(allJobs);
 	        _this2.setState({ jobs: allJobs, loading: false });
