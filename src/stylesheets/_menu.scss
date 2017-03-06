@@ -20,3 +20,6 @@
     @extend .menu-home;
   }
 }
+.selected{
+  color: $selected-color !important;
+}

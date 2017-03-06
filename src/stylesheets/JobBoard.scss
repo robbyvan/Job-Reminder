@@ -8,6 +8,26 @@
   h1 {
     font-size: 2em;
   }
+  .filter-panel {
+    font-size: 2em;
+    padding: 20px;
+    text-align: center;
+    a {
+      padding: 20px;
+    }
+    .alljobs {
+      color: #EDD28C;
+    }
+    .replied-filter{
+      color: $replied-color;
+    }
+    .pending-filter{
+      color: $main-color;
+    }
+    .declined-filter{
+      color: $title-color;
+    }
+  }
   .job-panel {
     display: flex;
     justify-content: space-between;
@@ -20,4 +40,11 @@
     margin-top: 50px;
     color: $main-color;
     font-size: 2em;
-  }
+}
+
+.loading-list {
+  display: block;
+  margin: 40px auto;
+  text-align: center;
+  font-size: 2em;
+}

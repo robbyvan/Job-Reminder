@@ -1,5 +1,10 @@
 import {Component, PropTypes} from 'react'
+import { Link } from 'react-router'
 import { JobBlock } from './JobBlock'
+import ListIcon from 'react-icons/lib/fa/list-alt'
+import RepliedJob from 'react-icons/lib/fa/calendar-check-o'
+import PendingJob from 'react-icons/lib/fa/calendar-o'
+import DeclinedJob from 'react-icons/lib/fa/calendar-times-o'
 
 require('./../stylesheets/JobBoard.scss');
 
@@ -13,23 +18,47 @@ export class JobBoard extends Component {
 
     let jobLength = this.props.myJobs.length;
 
+    let filteredJobs = this.props.statusFilter?
+            this.props.myJobs.filter((job) => 
+                              job.status.toLowerCase() === this.props.statusFilter) :
+            this.props.myJobs;
+
     return (
-      (jobLength > 0)?
-      //myJob is not empty
-      (<div className="job-board">
-          <div className="job-panel">
-              {this.props.myJobs.map(
-                (job, i) => <JobBlock key={i} 
-                                      {...job}
-                                      saveMyEdit={this.props.editJob}
-                                      removeFromBoard={this.props.removeFromBoard}
-                            />
-                )
-              }  
+      (this.props.loading)? 
+        <h1 className="loading-list">Loading...</h1>:
+        (jobLength > 0)?
+        //myJob is not empty
+        (<div className="job-board">
+          <div className="filter-panel">
+            <Link to="/joblist" className="alljobs">
+              <ListIcon />
+            </Link>
+            <Link to="/joblist/replied" className="replied-filter">
+              <RepliedJob />
+            </Link>
+            <Link to="/joblist/pending" className="pending-filter">
+              <PendingJob />
+            </Link>
+            <Link to="/joblist/declined" className="declined-filter">
+              <DeclinedJob />
+            </Link>
           </div>
-      </div>) :
-      //else, currently no job applications
-      (<h1 className="no-job-msg">Whoops, you don't have any job applications.</h1>)
+            
+            <div className="job-panel">
+                {filteredJobs.map(
+                  (job, i) => <JobBlock key={i} 
+                                        {...job}
+                                        saveMyEdit={this.props.editJob}
+                                        removeFromBoard={this.props.removeFromBoard}
+                              />
+                  )
+                }  
+            </div>
+        </div>) :
+        //else, currently no job applications
+        (<h1 className="no-job-msg">
+          Whoops, you don't have any job applications.
+          </h1>)
 
     );
   }

@@ -9,17 +9,17 @@ export const Menu = () => {
   return (
     <div className="menu">
       <div className="menu-home">
-        <Link to="/">
+        <Link to="/" activeClassName="selected">
           <HomeIcon />
         </Link>
       </div>
       <div className="menu-list">
-        <Link to="/job-list">
+        <Link to="/joblist" activeClassName="selected">
           <ListIcon />
         </Link>
       </div>
       <div className="menu-add">
-        <Link to="/add-job">
+        <Link to="/addjob" activeClassName="selected">
           <PencilIcon />
         </Link>
       </div>

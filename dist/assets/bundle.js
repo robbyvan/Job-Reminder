@@ -66,8 +66,12 @@
 	  _reactRouter.Router,
 	  { history: _reactRouter.hashHistory },
 	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App.App }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/job-list', component: _App.App }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/add-job', component: _App.App }),
+	  _react2.default.createElement(
+	    _reactRouter.Route,
+	    { path: '/joblist', component: _App.App },
+	    _react2.default.createElement(_reactRouter.Route, { path: ':filter', component: _App.App })
+	  ),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/addjob', component: _App.App }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '*', component: _Whoops.Whoops404 })
 	), document.getElementById('react-container'));
 
@@ -21644,9 +21648,11 @@
 	  }, {
 	    key: 'renderJobBoard',
 	    value: function renderJobBoard() {
-	      return React.createElement(_JobBoard.JobBoard, { myJobs: this.state.jobs,
+	      return React.createElement(_JobBoard.JobBoard, { loading: this.state.loading,
+	        myJobs: this.state.jobs,
 	        editJob: this.editJob,
-	        removeFromBoard: this.removeJob
+	        removeFromBoard: this.removeJob,
+	        statusFilter: this.props.params.filter
 	      });
 	    }
 	  }, {
@@ -21664,7 +21670,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'page-content' },
-	          this.props.location.pathname === "/" ? React.createElement(_JobCount.JobCount, { jobs: this.state.jobs }) : this.props.location.pathname === "/add-job" ? React.createElement(_AddJobForm.AddJobForm, { addNewJob: this.addJob }) : this.renderJobBoard()
+	          this.props.location.pathname === "/" ? React.createElement(_JobCount.JobCount, { jobs: this.state.jobs }) : this.props.location.pathname === "/addjob" ? React.createElement(_AddJobForm.AddJobForm, { addNewJob: this.addJob }) : this.renderJobBoard()
 	        ),
 	        this.state.hasPopup ? React.createElement(_Popup.Popup, { closePopup: this.togglePopup }) : null
 	      );
@@ -21712,7 +21718,7 @@
 	      { className: 'menu-home' },
 	      React.createElement(
 	        _reactRouter.Link,
-	        { to: '/' },
+	        { to: '/', activeClassName: 'selected' },
 	        React.createElement(_home2.default, null)
 	      )
 	    ),
@@ -21721,7 +21727,7 @@
 	      { className: 'menu-list' },
 	      React.createElement(
 	        _reactRouter.Link,
-	        { to: '/job-list' },
+	        { to: '/joblist', activeClassName: 'selected' },
 	        React.createElement(_listAlt2.default, null)
 	      )
 	    ),
@@ -21730,7 +21736,7 @@
 	      { className: 'menu-add' },
 	      React.createElement(
 	        _reactRouter.Link,
-	        { to: '/add-job' },
+	        { to: '/addjob', activeClassName: 'selected' },
 	        React.createElement(_pencil2.default, null)
 	      )
 	    )
@@ -26959,6 +26965,8 @@
 
 	var _react = __webpack_require__(1);
 
+	var _reactRouter = __webpack_require__(180);
+
 	var _paperPlaneO = __webpack_require__(240);
 
 	var _paperPlaneO2 = _interopRequireDefault(_paperPlaneO);
@@ -27026,36 +27034,48 @@
 	          'div',
 	          { className: 'jobStatus' },
 	          React.createElement(
-	            'div',
-	            { className: 'repliedJobs' },
-	            React.createElement(_calendarCheckO2.default, null),
+	            _reactRouter.Link,
+	            { to: '/joblist/replied' },
 	            React.createElement(
-	              'h2',
-	              null,
-	              'Replied ',
-	              repliedSum
+	              'div',
+	              { className: 'repliedJobs' },
+	              React.createElement(_calendarCheckO2.default, null),
+	              React.createElement(
+	                'h2',
+	                null,
+	                'Replied ',
+	                repliedSum
+	              )
 	            )
 	          ),
 	          React.createElement(
-	            'div',
-	            { className: 'pendingJobs' },
-	            React.createElement(_calendarO2.default, null),
+	            _reactRouter.Link,
+	            { to: '/joblist/pending' },
 	            React.createElement(
-	              'h2',
-	              null,
-	              'Pending ',
-	              pendingSum
+	              'div',
+	              { className: 'pendingJobs' },
+	              React.createElement(_calendarO2.default, null),
+	              React.createElement(
+	                'h2',
+	                null,
+	                'Pending ',
+	                pendingSum
+	              )
 	            )
 	          ),
 	          React.createElement(
-	            'div',
-	            { className: 'declinedJobs' },
-	            React.createElement(_calendarTimesO2.default, null),
+	            _reactRouter.Link,
+	            { to: '/joblist/declined' },
 	            React.createElement(
-	              'h2',
-	              null,
-	              'Declined ',
-	              declinedSum
+	              'div',
+	              { className: 'declinedJobs' },
+	              React.createElement(_calendarTimesO2.default, null),
+	              React.createElement(
+	                'h2',
+	                null,
+	                'Declined ',
+	                declinedSum
+	              )
 	            )
 	          )
 	        )
@@ -27263,7 +27283,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.jobCount-container .totalJobs {\n  font-size: 2.8em;\n  text-align: center;\n  border: 1px solid gray;\n  padding: 20px;\n  border-radius: 10px;\n  width: 300px;\n  margin: 40px auto; }\n\n.jobCount-container .jobStatus {\n  display: flex;\n  justify-content: space-around;\n  flex-wrap: wrap; }\n\n.jobCount-container .repliedJobs, .jobCount-container .pendingJobs, .jobCount-container .declinedJobs {\n  font-size: 2em;\n  margin: 40px 20px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 20px;\n  border-radius: 10px;\n  background-color: #9DBF9F; }\n  .jobCount-container .repliedJobs h2, .jobCount-container .pendingJobs h2, .jobCount-container .declinedJobs h2 {\n    padding: 10px; }\n\n.jobCount-container .pendingJobs {\n  background-color: #A3BFBF; }\n\n.jobCount-container .declinedJobs {\n  background-color: #D97059; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited, a:link {\n  color: #333; }\n\n.jobCount-container .totalJobs {\n  font-size: 2.8em;\n  text-align: center;\n  border: 1px solid gray;\n  padding: 20px;\n  border-radius: 10px;\n  width: 300px;\n  margin: 40px auto; }\n\n.jobCount-container .jobStatus {\n  display: flex;\n  justify-content: space-around;\n  flex-wrap: wrap; }\n\n.jobCount-container .repliedJobs, .jobCount-container .pendingJobs, .jobCount-container .declinedJobs {\n  font-size: 2em;\n  margin: 40px 20px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 20px;\n  border-radius: 10px;\n  background-color: #9DBF9F; }\n  .jobCount-container .repliedJobs h2, .jobCount-container .pendingJobs h2, .jobCount-container .declinedJobs h2 {\n    padding: 10px; }\n\n.jobCount-container .pendingJobs {\n  background-color: #A3BFBF; }\n\n.jobCount-container .declinedJobs {\n  background-color: #D97059; }\n\n.jobCount-container .repliedJobs:hover, .jobCount-container .pendingJobs:hover, .jobCount-container .declinedJobs:hover, .jobCount-container .pendingJobs:hover, .jobCount-container .declinedJobs:hover {\n  color: #fff; }\n", ""]);
 
 	// exports
 
@@ -27593,7 +27613,27 @@
 
 	var _react = __webpack_require__(1);
 
+	var _reactRouter = __webpack_require__(180);
+
 	var _JobBlock = __webpack_require__(249);
+
+	var _listAlt = __webpack_require__(237);
+
+	var _listAlt2 = _interopRequireDefault(_listAlt);
+
+	var _calendarCheckO = __webpack_require__(241);
+
+	var _calendarCheckO2 = _interopRequireDefault(_calendarCheckO);
+
+	var _calendarO = __webpack_require__(242);
+
+	var _calendarO2 = _interopRequireDefault(_calendarO);
+
+	var _calendarTimesO = __webpack_require__(243);
+
+	var _calendarTimesO2 = _interopRequireDefault(_calendarTimesO);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -27619,15 +27659,47 @@
 
 	      var jobLength = this.props.myJobs.length;
 
-	      return jobLength > 0 ?
+	      var filteredJobs = this.props.statusFilter ? this.props.myJobs.filter(function (job) {
+	        return job.status.toLowerCase() === _this2.props.statusFilter;
+	      }) : this.props.myJobs;
+
+	      return this.props.loading ? React.createElement(
+	        'h1',
+	        { className: 'loading-list' },
+	        'Loading...'
+	      ) : jobLength > 0 ?
 	      //myJob is not empty
 	      React.createElement(
 	        'div',
 	        { className: 'job-board' },
 	        React.createElement(
 	          'div',
+	          { className: 'filter-panel' },
+	          React.createElement(
+	            _reactRouter.Link,
+	            { to: '/joblist', className: 'alljobs' },
+	            React.createElement(_listAlt2.default, null)
+	          ),
+	          React.createElement(
+	            _reactRouter.Link,
+	            { to: '/joblist/replied', className: 'replied-filter' },
+	            React.createElement(_calendarCheckO2.default, null)
+	          ),
+	          React.createElement(
+	            _reactRouter.Link,
+	            { to: '/joblist/pending', className: 'pending-filter' },
+	            React.createElement(_calendarO2.default, null)
+	          ),
+	          React.createElement(
+	            _reactRouter.Link,
+	            { to: '/joblist/declined', className: 'declined-filter' },
+	            React.createElement(_calendarTimesO2.default, null)
+	          )
+	        ),
+	        React.createElement(
+	          'div',
 	          { className: 'job-panel' },
-	          this.props.myJobs.map(function (job, i) {
+	          filteredJobs.map(function (job, i) {
 	            return React.createElement(_JobBlock.JobBlock, _extends({ key: i
 	            }, job, {
 	              saveMyEdit: _this2.props.editJob,
@@ -27887,7 +27959,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.jobBlock {\n  box-sizing: border-box;\n  box-shadow: 2px 2px 2px 2px #C3C3C3;\n  width: 270px;\n  height: 320px;\n  margin: 10px;\n  background-color: #F8EBE3;\n  color: #787E8A; }\n  .jobBlock button {\n    border: none;\n    border-radius: 4px;\n    width: 100px;\n    height: 30px;\n    font-size: 1em;\n    color: #fff; }\n  .jobBlock button:hover {\n    cursor: pointer; }\n\n.jobBlock {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  flex-wrap: nowrap; }\n  .jobBlock a {\n    display: block;\n    text-align: center; }\n  .jobBlock a, .jobBlock a:visited, .jobBlock a:link {\n    color: #9DBF9F; }\n  .jobBlock h2, .jobBlock h3, .jobBlock h4, .jobBlock a, .jobBlock button {\n    margin: 8px auto; }\n  .jobBlock h2 {\n    font-size: 1.8em; }\n  .jobBlock h4 {\n    font-size: 1em;\n    text-align: right; }\n  .jobBlock .position-display {\n    font-size: 1.2em;\n    text-align: center; }\n  .jobBlock .status-display {\n    text-align: center;\n    font-size: 1.5em; }\n  .jobBlock .editJob, .jobBlock .saveJob {\n    background-color: #A3BFBF; }\n  .jobBlock .removeJob {\n    background-color: #D97059; }\n\n.jobBlock input {\n  height: 30px;\n  margin: 5px;\n  line-height: 30px;\n  font-size: .7em;\n  padding-left: 5px; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited, a:link {\n  color: #333; }\n\n.jobBlock {\n  box-sizing: border-box;\n  box-shadow: 2px 2px 2px 2px #C3C3C3;\n  width: 270px;\n  height: 320px;\n  margin: 10px;\n  background-color: #F8EBE3;\n  color: #787E8A; }\n  .jobBlock button {\n    border: none;\n    border-radius: 4px;\n    width: 100px;\n    height: 30px;\n    font-size: 1em;\n    color: #fff; }\n  .jobBlock button:hover {\n    cursor: pointer; }\n\n.jobBlock {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  flex-wrap: nowrap; }\n  .jobBlock a {\n    display: block;\n    text-align: center; }\n  .jobBlock a, .jobBlock a:visited, .jobBlock a:link {\n    color: #9DBF9F; }\n  .jobBlock h2, .jobBlock h3, .jobBlock h4, .jobBlock a, .jobBlock button {\n    margin: 8px auto; }\n  .jobBlock h2 {\n    font-size: 1.8em; }\n  .jobBlock h4 {\n    font-size: 1em;\n    text-align: right; }\n  .jobBlock .position-display {\n    font-size: 1.2em;\n    text-align: center; }\n  .jobBlock .status-display {\n    text-align: center;\n    font-size: 1.5em; }\n  .jobBlock .editJob, .jobBlock .saveJob {\n    background-color: #A3BFBF; }\n  .jobBlock .removeJob {\n    background-color: #D97059; }\n\n.jobBlock input {\n  height: 30px;\n  margin: 5px;\n  line-height: 30px;\n  font-size: .7em;\n  padding-left: 5px; }\n", ""]);
 
 	// exports
 
@@ -27927,7 +27999,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.job-board {\n  margin-top: 40px; }\n\n.job-board h1 {\n  font-size: 2em; }\n\n.job-board .job-panel {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap; }\n\n.no-job-msg {\n  text-align: center;\n  margin-top: 50px;\n  color: #A3BFBF;\n  font-size: 2em; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited, a:link {\n  color: #333; }\n\n.job-board {\n  margin-top: 40px; }\n\n.job-board h1 {\n  font-size: 2em; }\n\n.job-board .filter-panel {\n  font-size: 2em;\n  padding: 20px;\n  text-align: center; }\n  .job-board .filter-panel a {\n    padding: 20px; }\n  .job-board .filter-panel .alljobs {\n    color: #EDD28C; }\n  .job-board .filter-panel .replied-filter {\n    color: #9DBF9F; }\n  .job-board .filter-panel .pending-filter {\n    color: #A3BFBF; }\n  .job-board .filter-panel .declined-filter {\n    color: #D97059; }\n\n.job-board .job-panel {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap; }\n\n.no-job-msg {\n  text-align: center;\n  margin-top: 50px;\n  color: #A3BFBF;\n  font-size: 2em; }\n\n.loading-list {\n  display: block;\n  margin: 40px auto;\n  text-align: center;\n  font-size: 2em; }\n", ""]);
 
 	// exports
 
@@ -28107,7 +28179,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.add-job-form {\n  width: 80%;\n  margin: 40px auto;\n  display: flex;\n  flex-direction: column; }\n\n.add-job-form label, .add-job-form button {\n  margin-top: 20px;\n  font-size: .9em; }\n\n.add-job-form input {\n  font-family: \"Helvetica\", \"Arial\", sans-serif;\n  font-size: .9em;\n  margin-top: 8px;\n  box-sizing: border-box;\n  height: 40px;\n  line-height: 40px;\n  padding-left: 10px; }\n\n.add-job-form button {\n  border: none;\n  height: 40px;\n  background-color: #9DBF9F;\n  color: #fff; }\n\n.add-job-form button:hover {\n  cursor: pointer; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited, a:link {\n  color: #333; }\n\n.add-job-form {\n  width: 80%;\n  margin: 40px auto;\n  display: flex;\n  flex-direction: column; }\n\n.add-job-form label, .add-job-form button {\n  margin-top: 20px;\n  font-size: .9em; }\n\n.add-job-form input {\n  font-family: \"Helvetica\", \"Arial\", sans-serif;\n  font-size: .9em;\n  margin-top: 8px;\n  box-sizing: border-box;\n  height: 40px;\n  line-height: 40px;\n  padding-left: 10px; }\n\n.add-job-form button {\n  border: none;\n  height: 40px;\n  background-color: #9DBF9F;\n  color: #fff; }\n\n.add-job-form button:hover {\n  cursor: pointer; }\n", ""]);
 
 	// exports
 
@@ -28272,7 +28344,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.check-icon {\n  color: #9DBF9F;\n  font-size: 3em; }\n\n.Popup-mask {\n  position: absolute;\n  display: block;\n  top: 0;\n  height: 100%;\n  width: 100%;\n  background-color: rgba(255, 255, 255, 0.7); }\n\n.Popup-content {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  width: 500px;\n  height: 220px;\n  position: absolute;\n  top: 50%;\n  margin-top: -75px;\n  left: 50%;\n  margin-left: -250px;\n  background-color: #fff;\n  box-sizing: border-box;\n  box-shadow: 2px 2px 2px 2px #C3C3C3; }\n\n.Popup-msg {\n  margin: 0 auto;\n  text-align: center;\n  font-size: 1.4em; }\n  .Popup-msg h2 {\n    display: inline-block;\n    margin-left: 10px;\n    color: #9DBF9F; }\n\n.Popup-button {\n  margin: 10px auto;\n  padding: 10px;\n  display: block;\n  border: none;\n  color: #fff;\n  background-color: #D97059;\n  width: 250px;\n  height: 50px;\n  font-size: 1.2em;\n  line-height: 30px; }\n\n.Popup-button:hover {\n  cursor: pointer; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited, a:link {\n  color: #333; }\n\n.check-icon {\n  color: #9DBF9F;\n  font-size: 3em; }\n\n.Popup-mask {\n  position: absolute;\n  display: block;\n  top: 0;\n  height: 100%;\n  width: 100%;\n  background-color: rgba(255, 255, 255, 0.7); }\n\n.Popup-content {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  width: 500px;\n  height: 220px;\n  position: absolute;\n  top: 50%;\n  margin-top: -75px;\n  left: 50%;\n  margin-left: -250px;\n  background-color: #fff;\n  box-sizing: border-box;\n  box-shadow: 2px 2px 2px 2px #C3C3C3; }\n\n.Popup-msg {\n  margin: 0 auto;\n  text-align: center;\n  font-size: 1.4em; }\n  .Popup-msg h2 {\n    display: inline-block;\n    margin-left: 10px;\n    color: #9DBF9F; }\n\n.Popup-button {\n  margin: 10px auto;\n  padding: 10px;\n  display: block;\n  border: none;\n  color: #fff;\n  background-color: #D97059;\n  width: 250px;\n  height: 50px;\n  font-size: 1.2em;\n  line-height: 30px; }\n\n.Popup-button:hover {\n  cursor: pointer; }\n", ""]);
 
 	// exports
 
@@ -28312,7 +28384,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.menu {\n  position: fixed;\n  margin: 0;\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  height: 120px;\n  width: 100%;\n  font-size: 5em;\n  background-color: #A3BFBF; }\n  .menu .menu-home a, .menu .menu-list a, .menu .menu-add a {\n    color: #fff; }\n\n.app-container {\n  position: absolute;\n  width: 100%; }\n  .app-container .app-name {\n    font-size: 3em;\n    text-align: center;\n    margin-top: 160px;\n    color: #D97059; }\n\n.page-content {\n  display: block; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited, a:link {\n  color: #333; }\n\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited, a:link {\n  color: #333; }\n\n.menu {\n  position: fixed;\n  margin: 0;\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  height: 120px;\n  width: 100%;\n  font-size: 5em;\n  background-color: #A3BFBF; }\n  .menu .menu-home a, .menu .menu-list a, .menu .menu-add a {\n    color: #fff; }\n\n.selected {\n  color: #EDD28C !important; }\n\n.app-container {\n  position: absolute;\n  width: 100%; }\n  .app-container .app-name {\n    font-size: 3em;\n    text-align: center;\n    margin-top: 160px;\n    color: #D97059; }\n\n.page-content {\n  display: block; }\n", ""]);
 
 	// exports
 
@@ -28384,7 +28456,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.whoops404 {\n  margin: 10% auto; }\n  .whoops404 h1, .whoops404 a {\n    display: block;\n    text-align: center; }\n  .whoops404 h1 {\n    font-size: 3em;\n    color: #A3BFBF; }\n  .whoops404 a {\n    margin-top: 50px;\n    color: #D97059;\n    text-decoration: underline; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited, a:link {\n  color: #333; }\n\n.whoops404 {\n  margin: 10% auto; }\n  .whoops404 h1, .whoops404 a {\n    display: block;\n    text-align: center; }\n  .whoops404 h1 {\n    font-size: 3em;\n    color: #A3BFBF; }\n  .whoops404 a {\n    margin-top: 50px;\n    color: #D97059;\n    text-decoration: underline; }\n", ""]);
 
 	// exports
 

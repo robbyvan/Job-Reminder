@@ -9,8 +9,10 @@ window.React = React;
 render(
   <Router history={hashHistory}>
     <Route path="/" component={App} />
-    <Route path="/job-list" component={App} />
-    <Route path="/add-job" component={App} />
+    <Route path="/joblist" component={App}>
+      <Route path=":filter" component={App} />
+    </Route>
+    <Route path="/addjob" component={App} />
     <Route path="*" component={Whoops404} />
   </Router>,
   document.getElementById('react-container')

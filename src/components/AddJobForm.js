@@ -32,7 +32,6 @@ export const AddJobForm = ({company,
 
   return (
       <form className="add-job-form">
-
         <label htmlFor="company">Company</label>
         <input id="company"
                type="text"

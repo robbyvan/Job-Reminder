@@ -36,4 +36,7 @@
     @extend .repliedJobs;
     background-color: $title-color;
   }
+  .repliedJobs:hover, .pendingJobs:hover, .declinedJobs:hover{
+    color: #fff;
+  }
 }

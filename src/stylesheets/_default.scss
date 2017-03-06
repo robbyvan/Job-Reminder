@@ -23,6 +23,6 @@ body{
 a{
   text-decoration: none;
 }
-a:visited{
+a:visited, a:link{
   color: $html-text-color;
 }

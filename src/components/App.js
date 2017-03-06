@@ -104,12 +104,14 @@ export class App extends Component {
     });
   }
 
-  renderJobBoard() {
+  renderJobBoard() { 
     return (
-      <JobBoard   myJobs={this.state.jobs} 
-                  editJob={this.editJob}
-                  removeFromBoard={this.removeJob}
-      />
+            <JobBoard   loading={this.state.loading}
+                        myJobs={this.state.jobs} 
+                        editJob={this.editJob}
+                        removeFromBoard={this.removeJob}
+                        statusFilter={this.props.params.filter}
+            />
     );
   }
 
@@ -121,7 +123,7 @@ export class App extends Component {
         <div className="page-content">
           {(this.props.location.pathname === "/")?
               <JobCount jobs={this.state.jobs}/> :
-            (this.props.location.pathname === "/add-job")?
+            (this.props.location.pathname === "/addjob")?
               <AddJobForm addNewJob={this.addJob} /> :
               this.renderJobBoard()
           }  
