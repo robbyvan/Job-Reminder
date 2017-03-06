@@ -20,10 +20,9 @@ export class JobBoard extends Component {
           <div className="job-panel">
               {this.props.myJobs.map(
                 (job, i) => <JobBlock key={i} 
-                                    index={i}
-                                    {...job}
-                                    saveMyEdit={this.props.editJob}
-                                    removeFromBoard={this.props.removeFromBoard}
+                                      {...job}
+                                      saveMyEdit={this.props.editJob}
+                                      removeFromBoard={this.props.removeFromBoard}
                             />
                 )
               }  

@@ -54,7 +54,7 @@
 
 	var _App = __webpack_require__(178);
 
-	var _Whoops = __webpack_require__(260);
+	var _Whoops = __webpack_require__(263);
 
 	var _reactRouter = __webpack_require__(180);
 
@@ -21528,17 +21528,19 @@
 
 	var _AddJobForm = __webpack_require__(254);
 
+	var _Popup = __webpack_require__(257);
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var path = __webpack_require__(257);
-	__webpack_require__(258);
+	__webpack_require__(261);
 
 	var getAllJobs = function getAllJobs(method, url) {
 	  var myPromise = new Promise(function (resolve, reject) {
+
 	    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
 
 	    xhr.open(method, url, true);
@@ -21576,13 +21578,15 @@
 
 	    _this.state = {
 	      jobs: [],
-	      loading: false
+	      loading: false,
+	      hasPopup: false
 	    };
 
 	    _this.addJob = _this.addJob.bind(_this);
 	    _this.editJob = _this.editJob.bind(_this);
 	    _this.removeJob = _this.removeJob.bind(_this);
 	    _this.renderJobBoard = _this.renderJobBoard.bind(_this);
+	    _this.togglePopup = _this.togglePopup.bind(_this);
 	    return _this;
 	  }
 
@@ -21592,6 +21596,7 @@
 	      var _this2 = this;
 
 	      this.setState({ loading: true });
+
 	      getAllJobs('GET', 'https://robbyvan.github.io/Job-Reminder/dist/data/applications.json').then(function (res) {
 	        var allJobs = JSON.parse(res);
 	        console.log(allJobs);
@@ -21601,19 +21606,27 @@
 	      });
 	    }
 	  }, {
+	    key: 'togglePopup',
+	    value: function togglePopup() {
+	      this.state.hasPopup = this.setState({
+	        hasPopup: !this.state.hasPopup
+	      });
+	    }
+	  }, {
 	    key: 'addJob',
 	    value: function addJob(newJob) {
-	      var arr = this.state.jobs;
+	      var arr = this.state.jobs.slice(0);
 	      arr.push(newJob);
 	      this.setState({
 	        jobs: arr
 	      });
+	      this.togglePopup();
 	    }
 	  }, {
 	    key: 'editJob',
 	    value: function editJob(i, newInfo) {
 	      console.log('editing at App.js: ' + i);
-	      var arr = this.state.jobs;
+	      var arr = this.state.jobs.slice(0);
 	      arr[i] = newInfo;
 	      this.setState({
 	        jobs: arr
@@ -21652,7 +21665,8 @@
 	          'div',
 	          { className: 'page-content' },
 	          this.props.location.pathname === "/" ? React.createElement(_JobCount.JobCount, { jobs: this.state.jobs }) : this.props.location.pathname === "/add-job" ? React.createElement(_AddJobForm.AddJobForm, { addNewJob: this.addJob }) : this.renderJobBoard()
-	        )
+	        ),
+	        this.state.hasPopup ? React.createElement(_Popup.Popup, { closePopup: this.togglePopup }) : null
 	      );
 	    }
 	  }]);
@@ -27249,7 +27263,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.jobCount-container .totalJobs {\n  font-size: 2.8em;\n  text-align: center;\n  border: 1px solid gray;\n  padding: 20px;\n  border-radius: 10px;\n  width: 300px;\n  margin: 40px auto; }\n\n.jobCount-container .jobStatus {\n  display: flex;\n  justify-content: space-around;\n  flex-wrap: wrap; }\n\n.jobCount-container .repliedJobs, .jobCount-container .pendingJobs, .jobCount-container .declinedJobs {\n  font-size: 2em;\n  margin: 40px 20px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 20px;\n  border-radius: 10px;\n  background-color: #9DBF9F; }\n  .jobCount-container .repliedJobs h2, .jobCount-container .pendingJobs h2, .jobCount-container .declinedJobs h2 {\n    padding: 10px; }\n\n.jobCount-container .pendingJobs {\n  background-color: #A3BFBF; }\n\n.jobCount-container .declinedJobs {\n  background-color: #D97059; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.jobCount-container .totalJobs {\n  font-size: 2.8em;\n  text-align: center;\n  border: 1px solid gray;\n  padding: 20px;\n  border-radius: 10px;\n  width: 300px;\n  margin: 40px auto; }\n\n.jobCount-container .jobStatus {\n  display: flex;\n  justify-content: space-around;\n  flex-wrap: wrap; }\n\n.jobCount-container .repliedJobs, .jobCount-container .pendingJobs, .jobCount-container .declinedJobs {\n  font-size: 2em;\n  margin: 40px 20px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 20px;\n  border-radius: 10px;\n  background-color: #9DBF9F; }\n  .jobCount-container .repliedJobs h2, .jobCount-container .pendingJobs h2, .jobCount-container .declinedJobs h2 {\n    padding: 10px; }\n\n.jobCount-container .pendingJobs {\n  background-color: #A3BFBF; }\n\n.jobCount-container .declinedJobs {\n  background-color: #D97059; }\n", ""]);
 
 	// exports
 
@@ -27614,8 +27628,7 @@
 	          'div',
 	          { className: 'job-panel' },
 	          this.props.myJobs.map(function (job, i) {
-	            return React.createElement(_JobBlock.JobBlock, _extends({ key: i,
-	              index: i
+	            return React.createElement(_JobBlock.JobBlock, _extends({ key: i
 	            }, job, {
 	              saveMyEdit: _this2.props.editJob,
 	              removeFromBoard: _this2.props.removeFromBoard
@@ -27711,7 +27724,7 @@
 	      console.log('newInfo: ');
 	      console.log(newInfo);
 
-	      this.props.saveMyEdit(this.props.index, newInfo);
+	      this.props.saveMyEdit(this.props.key, newInfo);
 
 	      this.setState({
 	        editing: !this.state.editing
@@ -27720,7 +27733,8 @@
 	  }, {
 	    key: 'handleRemove',
 	    value: function handleRemove() {
-	      this.props.removeFromBoard(this.props.index);
+	      //remove
+	      this.props.removeFromBoard(this.props.key);
 	      console.log('removed');
 	    }
 	  }, {
@@ -27873,7 +27887,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.jobBlock {\n  box-sizing: border-box;\n  box-shadow: 2px 2px 2px 2px #C3C3C3;\n  width: 270px;\n  height: 320px;\n  margin: 10px;\n  background-color: #F8EBE3;\n  color: #787E8A; }\n  .jobBlock button {\n    border: none;\n    border-radius: 4px;\n    width: 100px;\n    height: 30px;\n    font-size: 1em;\n    color: #fff; }\n  .jobBlock button:hover {\n    cursor: pointer; }\n\n.jobBlock {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  flex-wrap: nowrap; }\n  .jobBlock a {\n    display: block;\n    text-align: center;\n    color: #787E8A; }\n  .jobBlock h2, .jobBlock h3, .jobBlock h4, .jobBlock a, .jobBlock button {\n    margin: 8px auto; }\n  .jobBlock h2 {\n    font-size: 1.8em; }\n  .jobBlock h4 {\n    font-size: 1em;\n    text-align: right; }\n  .jobBlock .position-display {\n    font-size: 1.2em;\n    text-align: center; }\n  .jobBlock .status-display {\n    text-align: center;\n    font-size: 1.5em; }\n  .jobBlock .editJob, .jobBlock .saveJob {\n    background-color: #A3BFBF; }\n  .jobBlock .removeJob {\n    background-color: #D97059; }\n\n.jobBlock input {\n  height: 30px;\n  margin: 5px;\n  line-height: 30px;\n  font-size: .7em;\n  padding-left: 5px; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.jobBlock {\n  box-sizing: border-box;\n  box-shadow: 2px 2px 2px 2px #C3C3C3;\n  width: 270px;\n  height: 320px;\n  margin: 10px;\n  background-color: #F8EBE3;\n  color: #787E8A; }\n  .jobBlock button {\n    border: none;\n    border-radius: 4px;\n    width: 100px;\n    height: 30px;\n    font-size: 1em;\n    color: #fff; }\n  .jobBlock button:hover {\n    cursor: pointer; }\n\n.jobBlock {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  flex-wrap: nowrap; }\n  .jobBlock a {\n    display: block;\n    text-align: center; }\n  .jobBlock a, .jobBlock a:visited, .jobBlock a:link {\n    color: #9DBF9F; }\n  .jobBlock h2, .jobBlock h3, .jobBlock h4, .jobBlock a, .jobBlock button {\n    margin: 8px auto; }\n  .jobBlock h2 {\n    font-size: 1.8em; }\n  .jobBlock h4 {\n    font-size: 1em;\n    text-align: right; }\n  .jobBlock .position-display {\n    font-size: 1.2em;\n    text-align: center; }\n  .jobBlock .status-display {\n    text-align: center;\n    font-size: 1.5em; }\n  .jobBlock .editJob, .jobBlock .saveJob {\n    background-color: #A3BFBF; }\n  .jobBlock .removeJob {\n    background-color: #D97059; }\n\n.jobBlock input {\n  height: 30px;\n  margin: 5px;\n  line-height: 30px;\n  font-size: .7em;\n  padding-left: 5px; }\n", ""]);
 
 	// exports
 
@@ -27913,7 +27927,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.job-board {\n  margin-top: 40px; }\n\n.job-board h1 {\n  font-size: 2em; }\n\n.job-board .job-panel {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap; }\n\n.no-job-msg {\n  text-align: center;\n  margin-top: 50px;\n  color: #A3BFBF;\n  font-size: 2em; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.job-board {\n  margin-top: 40px; }\n\n.job-board h1 {\n  font-size: 2em; }\n\n.job-board .job-panel {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap; }\n\n.no-job-msg {\n  text-align: center;\n  margin-top: 50px;\n  color: #A3BFBF;\n  font-size: 2em; }\n", ""]);
 
 	// exports
 
@@ -27939,7 +27953,8 @@
 	      appliedDate = _ref.appliedDate,
 	      status = _ref.status,
 	      jobLink = _ref.jobLink,
-	      addNewJob = _ref.addNewJob;
+	      addNewJob = _ref.addNewJob,
+	      togglePopup = _ref.togglePopup;
 
 
 	  var _company = void 0,
@@ -28092,7 +28107,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.add-job-form {\n  width: 80%;\n  margin: 40px auto;\n  display: flex;\n  flex-direction: column; }\n\n.add-job-form label, .add-job-form button {\n  margin-top: 20px;\n  font-size: .9em; }\n\n.add-job-form input {\n  font-size: .9em;\n  margin-top: 8px;\n  box-sizing: border-box;\n  height: 40px;\n  line-height: 40px;\n  padding-left: 10px; }\n\n.add-job-form button {\n  border: none;\n  height: 40px;\n  background-color: #9DBF9F;\n  color: #333; }\n\n.add-job-form button:hover {\n  cursor: pointer; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.add-job-form {\n  width: 80%;\n  margin: 40px auto;\n  display: flex;\n  flex-direction: column; }\n\n.add-job-form label, .add-job-form button {\n  margin-top: 20px;\n  font-size: .9em; }\n\n.add-job-form input {\n  font-family: \"Helvetica\", \"Arial\", sans-serif;\n  font-size: .9em;\n  margin-top: 8px;\n  box-sizing: border-box;\n  height: 40px;\n  line-height: 40px;\n  padding-left: 10px; }\n\n.add-job-form button {\n  border: none;\n  height: 40px;\n  background-color: #9DBF9F;\n  color: #fff; }\n\n.add-job-form button:hover {\n  cursor: pointer; }\n", ""]);
 
 	// exports
 
@@ -28101,241 +28116,175 @@
 /* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+	'use strict';
 
-	// resolves . and .. elements in a path array with directory names there
-	// must be no slashes, empty elements, or device names (c:\) in the array
-	// (so also no leading and trailing slashes - it does not distinguish
-	// relative and absolute paths)
-	function normalizeArray(parts, allowAboveRoot) {
-	  // if the path tries to go above the root, `up` ends up > 0
-	  var up = 0;
-	  for (var i = parts.length - 1; i >= 0; i--) {
-	    var last = parts[i];
-	    if (last === '.') {
-	      parts.splice(i, 1);
-	    } else if (last === '..') {
-	      parts.splice(i, 1);
-	      up++;
-	    } else if (up) {
-	      parts.splice(i, 1);
-	      up--;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Popup = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _check = __webpack_require__(258);
+
+	var _check2 = _interopRequireDefault(_check);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(259);
+
+	var Popup = exports.Popup = function (_Component) {
+	  _inherits(Popup, _Component);
+
+	  function Popup(props) {
+	    _classCallCheck(this, Popup);
+
+	    var _this = _possibleConstructorReturn(this, (Popup.__proto__ || Object.getPrototypeOf(Popup)).call(this, props));
+
+	    _this.handleClick = _this.handleClick.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(Popup, [{
+	    key: 'handleClick',
+	    value: function handleClick() {
+	      this.props.closePopup();
 	    }
-	  }
-
-	  // if the path is allowed to go above the root, restore leading ..s
-	  if (allowAboveRoot) {
-	    for (; up--; up) {
-	      parts.unshift('..');
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        { className: 'Popup-mask' },
+	        React.createElement(
+	          'div',
+	          { className: 'Popup-content' },
+	          React.createElement(
+	            'div',
+	            { className: 'Popup-msg' },
+	            React.createElement(_check2.default, { className: 'check-icon' }),
+	            React.createElement(
+	              'h2',
+	              null,
+	              this.props.msg
+	            )
+	          ),
+	          React.createElement(
+	            'button',
+	            { className: 'Popup-button',
+	              onClick: this.handleClick },
+	            this.props.button
+	          )
+	        )
+	      );
 	    }
-	  }
+	  }]);
 
-	  return parts;
-	}
+	  return Popup;
+	}(_react.Component);
 
-	// Split a filename into [root, dir, basename, ext], unix version
-	// 'root' is just a slash, or nothing.
-	var splitPathRe =
-	    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
-	var splitPath = function(filename) {
-	  return splitPathRe.exec(filename).slice(1);
+	Popup.PropTypes = {
+	  msg: _react.PropTypes.string.isrequired,
+	  button: _react.PropTypes.string.isrequired
 	};
-
-	// path.resolve([from ...], to)
-	// posix version
-	exports.resolve = function() {
-	  var resolvedPath = '',
-	      resolvedAbsolute = false;
-
-	  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
-	    var path = (i >= 0) ? arguments[i] : process.cwd();
-
-	    // Skip empty and invalid entries
-	    if (typeof path !== 'string') {
-	      throw new TypeError('Arguments to path.resolve must be strings');
-	    } else if (!path) {
-	      continue;
-	    }
-
-	    resolvedPath = path + '/' + resolvedPath;
-	    resolvedAbsolute = path.charAt(0) === '/';
-	  }
-
-	  // At this point the path should be resolved to a full absolute path, but
-	  // handle relative paths to be safe (might happen when process.cwd() fails)
-
-	  // Normalize the path
-	  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
-	    return !!p;
-	  }), !resolvedAbsolute).join('/');
-
-	  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+	Popup.defaultProps = {
+	  msg: 'New Application Added',
+	  button: 'Got it'
 	};
-
-	// path.normalize(path)
-	// posix version
-	exports.normalize = function(path) {
-	  var isAbsolute = exports.isAbsolute(path),
-	      trailingSlash = substr(path, -1) === '/';
-
-	  // Normalize the path
-	  path = normalizeArray(filter(path.split('/'), function(p) {
-	    return !!p;
-	  }), !isAbsolute).join('/');
-
-	  if (!path && !isAbsolute) {
-	    path = '.';
-	  }
-	  if (path && trailingSlash) {
-	    path += '/';
-	  }
-
-	  return (isAbsolute ? '/' : '') + path;
-	};
-
-	// posix version
-	exports.isAbsolute = function(path) {
-	  return path.charAt(0) === '/';
-	};
-
-	// posix version
-	exports.join = function() {
-	  var paths = Array.prototype.slice.call(arguments, 0);
-	  return exports.normalize(filter(paths, function(p, index) {
-	    if (typeof p !== 'string') {
-	      throw new TypeError('Arguments to path.join must be strings');
-	    }
-	    return p;
-	  }).join('/'));
-	};
-
-
-	// path.relative(from, to)
-	// posix version
-	exports.relative = function(from, to) {
-	  from = exports.resolve(from).substr(1);
-	  to = exports.resolve(to).substr(1);
-
-	  function trim(arr) {
-	    var start = 0;
-	    for (; start < arr.length; start++) {
-	      if (arr[start] !== '') break;
-	    }
-
-	    var end = arr.length - 1;
-	    for (; end >= 0; end--) {
-	      if (arr[end] !== '') break;
-	    }
-
-	    if (start > end) return [];
-	    return arr.slice(start, end - start + 1);
-	  }
-
-	  var fromParts = trim(from.split('/'));
-	  var toParts = trim(to.split('/'));
-
-	  var length = Math.min(fromParts.length, toParts.length);
-	  var samePartsLength = length;
-	  for (var i = 0; i < length; i++) {
-	    if (fromParts[i] !== toParts[i]) {
-	      samePartsLength = i;
-	      break;
-	    }
-	  }
-
-	  var outputParts = [];
-	  for (var i = samePartsLength; i < fromParts.length; i++) {
-	    outputParts.push('..');
-	  }
-
-	  outputParts = outputParts.concat(toParts.slice(samePartsLength));
-
-	  return outputParts.join('/');
-	};
-
-	exports.sep = '/';
-	exports.delimiter = ':';
-
-	exports.dirname = function(path) {
-	  var result = splitPath(path),
-	      root = result[0],
-	      dir = result[1];
-
-	  if (!root && !dir) {
-	    // No dirname whatsoever
-	    return '.';
-	  }
-
-	  if (dir) {
-	    // It has a dirname, strip trailing slash
-	    dir = dir.substr(0, dir.length - 1);
-	  }
-
-	  return root + dir;
-	};
-
-
-	exports.basename = function(path, ext) {
-	  var f = splitPath(path)[2];
-	  // TODO: make this comparison case-insensitive on windows?
-	  if (ext && f.substr(-1 * ext.length) === ext) {
-	    f = f.substr(0, f.length - ext.length);
-	  }
-	  return f;
-	};
-
-
-	exports.extname = function(path) {
-	  return splitPath(path)[3];
-	};
-
-	function filter (xs, f) {
-	    if (xs.filter) return xs.filter(f);
-	    var res = [];
-	    for (var i = 0; i < xs.length; i++) {
-	        if (f(xs[i], i, xs)) res.push(xs[i]);
-	    }
-	    return res;
-	}
-
-	// String.prototype.substr - negative index don't work in IE8
-	var substr = 'ab'.substr(-1) === 'b'
-	    ? function (str, start, len) { return str.substr(start, len) }
-	    : function (str, start, len) {
-	        if (start < 0) start = str.length + start;
-	        return str.substr(start, len);
-	    }
-	;
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
 /* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactIconBase = __webpack_require__(236);
+
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var FaCheck = function FaCheck(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm37.3 12.6q0 0.9-0.6 1.6l-19.2 19.1q-0.6 0.7-1.5 0.7t-1.6-0.7l-11.1-11.1q-0.6-0.6-0.6-1.5t0.6-1.5l3.1-3q0.6-0.7 1.5-0.7t1.5 0.7l6.6 6.5 14.6-14.6q0.6-0.6 1.5-0.6t1.5 0.6l3.1 3q0.6 0.6 0.6 1.5z' })
+	        )
+	    );
+	};
+
+	exports.default = FaCheck;
+	module.exports = exports['default'];
+
+/***/ },
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(259);
+	var content = __webpack_require__(260);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(247)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./Popup.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./Popup.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(246)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.check-icon {\n  color: #9DBF9F;\n  font-size: 3em; }\n\n.Popup-mask {\n  position: absolute;\n  display: block;\n  top: 0;\n  height: 100%;\n  width: 100%;\n  background-color: rgba(255, 255, 255, 0.7); }\n\n.Popup-content {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  width: 500px;\n  height: 220px;\n  position: absolute;\n  top: 50%;\n  margin-top: -75px;\n  left: 50%;\n  margin-left: -250px;\n  background-color: #fff;\n  box-sizing: border-box;\n  box-shadow: 2px 2px 2px 2px #C3C3C3; }\n\n.Popup-msg {\n  margin: 0 auto;\n  text-align: center;\n  font-size: 1.4em; }\n  .Popup-msg h2 {\n    display: inline-block;\n    margin-left: 10px;\n    color: #9DBF9F; }\n\n.Popup-button {\n  margin: 10px auto;\n  padding: 10px;\n  display: block;\n  border: none;\n  color: #fff;\n  background-color: #D97059;\n  width: 250px;\n  height: 50px;\n  font-size: 1.2em;\n  line-height: 30px; }\n\n.Popup-button:hover {\n  cursor: pointer; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(262);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(247)(content, {});
@@ -28355,7 +28304,7 @@
 	}
 
 /***/ },
-/* 259 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(246)();
@@ -28363,13 +28312,13 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.menu {\n  position: fixed;\n  margin: 0;\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  height: 120px;\n  width: 100%;\n  font-size: 5em;\n  background-color: #A3BFBF; }\n  .menu .menu-home a, .menu .menu-list a, .menu .menu-add a {\n    color: #fff; }\n\n.app-container {\n  position: absolute;\n  width: 100%; }\n  .app-container .app-name {\n    font-size: 3em;\n    text-align: center;\n    margin-top: 160px;\n    color: #D97059; }\n\n.page-content {\n  display: block; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.menu {\n  position: fixed;\n  margin: 0;\n  display: flex;\n  justify-content: space-around;\n  align-items: center;\n  height: 120px;\n  width: 100%;\n  font-size: 5em;\n  background-color: #A3BFBF; }\n  .menu .menu-home a, .menu .menu-list a, .menu .menu-add a {\n    color: #fff; }\n\n.app-container {\n  position: absolute;\n  width: 100%; }\n  .app-container .app-name {\n    font-size: 3em;\n    text-align: center;\n    margin-top: 160px;\n    color: #D97059; }\n\n.page-content {\n  display: block; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 260 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28381,7 +28330,7 @@
 
 	var _reactRouter = __webpack_require__(180);
 
-	__webpack_require__(261);
+	__webpack_require__(264);
 
 	var Whoops404 = exports.Whoops404 = function Whoops404() {
 	  return React.createElement(
@@ -28401,13 +28350,13 @@
 	};
 
 /***/ },
-/* 261 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(262);
+	var content = __webpack_require__(265);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(247)(content, {});
@@ -28427,7 +28376,7 @@
 	}
 
 /***/ },
-/* 262 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(246)();
@@ -28435,7 +28384,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"STHeiti\", \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.whoops404 {\n  margin: 10% auto; }\n  .whoops404 h1, .whoops404 a {\n    display: block;\n    text-align: center; }\n  .whoops404 h1 {\n    font-size: 3em;\n    color: #A3BFBF; }\n  .whoops404 a {\n    margin-top: 50px;\n    color: #D97059;\n    text-decoration: underline; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*Global Styles*/\nhtml, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, p, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  vertical-align: baseline;\n  font: inherit; }\n\nhtml {\n  font-family: \"helvetica\", Arial, sans-serif;\n  font-size: 14pt;\n  color: #333;\n  height: 100%; }\n\nbody {\n  height: 100%; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #333; }\n\n.whoops404 {\n  margin: 10% auto; }\n  .whoops404 h1, .whoops404 a {\n    display: block;\n    text-align: center; }\n  .whoops404 h1 {\n    font-size: 3em;\n    color: #A3BFBF; }\n  .whoops404 a {\n    margin-top: 50px;\n    color: #D97059;\n    text-decoration: underline; }\n", ""]);
 
 	// exports
 

@@ -29,7 +29,9 @@
   a {
     display: block;
     text-align: center;
-    color: $blockText-color;
+  }
+  a, a:visited, a:link {
+    color: $replied-color;
   }
   h2, h3, h4, a, button {
     margin: 8px auto;

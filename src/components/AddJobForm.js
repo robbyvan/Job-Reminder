@@ -7,7 +7,8 @@ export const AddJobForm = ({company,
                             appliedDate, 
                             status, 
                             jobLink,
-                            addNewJob}) => {
+                            addNewJob,
+                            togglePopup}) => {
 
   let _company, _position, _appliedDate, _status, _jobLink;
 
