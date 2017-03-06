@@ -3,7 +3,8 @@ import { Menu } from './Menu'
 import { JobCount } from './JobCount'
 import { JobBoard } from './JobBoard'
 import { AddJobForm } from './AddJobForm'
-require('./../stylesheets/app.scss')
+var path = require('path');
+require('./../stylesheets/app.scss');
 
 
 const getAllJobs = (method, url) => {
@@ -54,7 +55,7 @@ export class App extends Component {
 
   componentDidMount() {
     this.setState({loading: true});
-    getAllJobs('GET', './../applications.json')
+    getAllJobs('GET', __dirname + 'data/applications.json')
       .then((res) => {
         let allJobs = JSON.parse(res);
         console.log(allJobs);
