@@ -16,13 +16,13 @@ export class JobBoard extends Component {
 
   render() {
 
-    let jobLength = this.props.myJobs.length;
-
     let filteredJobs = this.props.statusFilter?
             this.props.myJobs.filter((job) => 
                               job.status.toLowerCase() === this.props.statusFilter) :
             this.props.myJobs;
 
+    let jobLength = filteredJobs.length;
+            
     return (
       (this.props.loading)? 
         <h1 className="loading-list">Loading...</h1>:
@@ -59,6 +59,11 @@ export class JobBoard extends Component {
                 <div className="jobBlock"></div>
             </div>
         </div>) :
+        //No such filter
+        (this.props.myJobs.length)?
+        (<h1 className="no-job-msg">
+          Whoops, nothing is here.
+          </h1>) :
         //else, currently no job applications
         (<h1 className="no-job-msg">
           Whoops, you don't have any job applications.
