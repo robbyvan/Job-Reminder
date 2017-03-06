@@ -13,13 +13,15 @@ export const AddJobForm = ({company,
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addNewJob({
+    let newJob = {
       company: _company.value,
       appliedDate: _appliedDate.value,
       position: _position.value,
       status: _status.value,
       jobLink: _jobLink.value
-    });
+    };
+    //Need to validate form here.
+    addNewJob(newJob);
     _company.value = '';
     _appliedDate.value = '';
     _position.value = '';

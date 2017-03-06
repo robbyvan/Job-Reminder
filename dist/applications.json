@@ -1,0 +1,30 @@
+[
+  {        
+     "company": "Alibaba",
+     "appliedDate": "03-01-2017",
+     "position": "Front-End Engineer",
+     "status": "Pending",
+     "jobLink": "http://www.alibabagroup.com/en/global/careers"
+  },
+  {
+     "company": "Yahoo",
+     "appliedDate": "02-07-2017",
+     "position": "2017 Summer Intern",
+     "status": "Pending",
+     "jobLink": "https://careers.yahoo.com/us/students"
+  },
+  {
+     "company": "Tencent",
+     "appliedDate": "03-01-2017",
+     "position": "Front-End Developer",
+     "status": "Replied",
+     "jobLink": "http://join.qq.com/"
+  },
+  {
+     "company": "Redfin",
+     "appliedDate": "02-10-2017",
+     "position": "Software Engineer",
+     "status": "Delclined",
+     "jobLink": "https://www.redfin.com/about/jobs"
+  }       
+]

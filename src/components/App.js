@@ -6,48 +6,63 @@ import { AddJobForm } from './AddJobForm'
 require('./../stylesheets/app.scss')
 
 
+const getAllJobs = (method, url) => {
+  let myPromise = new Promise((resolve, reject) => {
+    let xhr = (window.XMLHttpRequest)?
+            new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+
+    xhr.open(method, url, true);
+
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300){
+        resolve(xhr.response);
+      }else {
+        reject({
+          status: xhr.status,
+          statusText: xhr.statusText
+        });
+      }
+    };
+
+    xhr.onerror = () => {
+      reject({
+        status: xhr.status,
+        statusText: xhr.statusText
+      });
+    };
+
+    xhr.send();
+  });
+  return myPromise;
+}
 
 export class App extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      jobs: [
-        {
-          company: 'Alibaba',
-          appliedDate: '03-01-2017',
-          position: 'Front-End Engineer',
-          status: 'Pending',
-          jobLink: 'aliLink'
-        },
-        {
-          company: 'Yahoo',
-          appliedDate: '02-15-2017',
-          position: '2017 Summer Intern',
-          status: 'Pending',
-          jobLink: 'YahooCareer'
-        },
-        {
-          company: 'LiveRamp',
-          appliedDate: '02-15-2017',
-          position: 'Software Engineer',
-          status: 'Replied',
-          jobLink: 'LRCareer'
-        },
-        {
-          company: 'Redfin',
-          appliedDate: '02-10-2017',
-          position: 'Software Engineer',
-          status: 'Delclined',
-          jobLink: 'RFCareer'
-        }
-      ]
+      jobs: [],
+      loading: false
     };
 
     this.addJob = this.addJob.bind(this);
     this.editJob = this.editJob.bind(this);
     this.removeJob = this.removeJob.bind(this);
     this.renderJobBoard = this.renderJobBoard.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({loading: true});
+    getAllJobs('GET', './../applications.json')
+      .then((res) => {
+        let allJobs = JSON.parse(res);
+        console.log(allJobs);
+        this.setState({jobs: allJobs, loading: false});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   addJob(newJob) {

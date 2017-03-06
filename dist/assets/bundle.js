@@ -21536,6 +21536,35 @@
 
 	__webpack_require__(257);
 
+	var getAllJobs = function getAllJobs(method, url) {
+	  var myPromise = new Promise(function (resolve, reject) {
+	    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+
+	    xhr.open(method, url, true);
+
+	    xhr.onload = function () {
+	      if (xhr.status >= 200 && xhr.status < 300) {
+	        resolve(xhr.response);
+	      } else {
+	        reject({
+	          status: xhr.status,
+	          statusText: xhr.statusText
+	        });
+	      }
+	    };
+
+	    xhr.onerror = function () {
+	      reject({
+	        status: xhr.status,
+	        statusText: xhr.statusText
+	      });
+	    };
+
+	    xhr.send();
+	  });
+	  return myPromise;
+	};
+
 	var App = exports.App = function (_Component) {
 	  _inherits(App, _Component);
 
@@ -21545,31 +21574,8 @@
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 	    _this.state = {
-	      jobs: [{
-	        company: 'Alibaba',
-	        appliedDate: new Date('3/1/2017'),
-	        position: 'Front-End Engineer',
-	        status: 'Pending',
-	        jobLink: 'aliLink'
-	      }, {
-	        company: 'Yahoo',
-	        appliedDate: new Date('2/15/2017'),
-	        position: '2017 Summer Intern',
-	        status: 'Pending',
-	        jobLink: 'YahooCareer'
-	      }, {
-	        company: 'LiveRamp',
-	        appliedDate: new Date('2/15/2017'),
-	        position: 'Software Engineer',
-	        status: 'Replied',
-	        jobLink: 'LRCareer'
-	      }, {
-	        company: 'Redfin',
-	        appliedDate: new Date('2/10/2017'),
-	        position: 'Software Engineer',
-	        status: 'Delclined',
-	        jobLink: 'RFCareer'
-	      }]
+	      jobs: [],
+	      loading: false
 	    };
 
 	    _this.addJob = _this.addJob.bind(_this);
@@ -21580,6 +21586,20 @@
 	  }
 
 	  _createClass(App, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      this.setState({ loading: true });
+	      getAllJobs('GET', './../applications.json').then(function (res) {
+	        var allJobs = JSON.parse(res);
+	        console.log(allJobs);
+	        _this2.setState({ jobs: allJobs, loading: false });
+	      }).catch(function (err) {
+	        console.log(err);
+	      });
+	    }
+	  }, {
 	    key: 'addJob',
 	    value: function addJob(newJob) {
 	      var arr = this.state.jobs;
@@ -21630,7 +21650,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'page-content' },
-	          this.props.location.pathname === "/" ? React.createElement(_JobCount.JobCount, null) : this.props.location.pathname === "/add-job" ? React.createElement(_AddJobForm.AddJobForm, { addNewJob: this.addJob }) : this.renderJobBoard()
+	          this.props.location.pathname === "/" ? React.createElement(_JobCount.JobCount, { jobs: this.state.jobs }) : this.props.location.pathname === "/add-job" ? React.createElement(_AddJobForm.AddJobForm, { addNewJob: this.addJob }) : this.renderJobBoard()
 	        )
 	      );
 	    }
@@ -26962,6 +26982,17 @@
 	  _createClass(JobCount, [{
 	    key: 'render',
 	    value: function render() {
+	      var jobs = this.props.jobs;
+	      var totalSum = void 0,
+	          repliedSum = void 0,
+	          pendingSum = void 0,
+	          declinedSum = void 0;
+	      totalSum = repliedSum = pendingSum = declinedSum = 0;
+	      for (var i = 0; i < jobs.length; ++i) {
+	        totalSum += 1;
+	        jobs[i].status === "Replied" ? repliedSum += 1 : jobs[i].status === "Pending" ? pendingSum += 1 : declinedSum += 1;
+	      }
+
 	      return React.createElement(
 	        'div',
 	        { className: 'jobCount-container' },
@@ -26973,7 +27004,7 @@
 	            'h1',
 	            null,
 	            'Total ',
-	            this.props.total
+	            totalSum
 	          )
 	        ),
 	        React.createElement(
@@ -26987,7 +27018,7 @@
 	              'h2',
 	              null,
 	              'Replied ',
-	              this.props.replied
+	              repliedSum
 	            )
 	          ),
 	          React.createElement(
@@ -26998,7 +27029,7 @@
 	              'h2',
 	              null,
 	              'Pending ',
-	              this.props.pending
+	              pendingSum
 	            )
 	          ),
 	          React.createElement(
@@ -27009,7 +27040,7 @@
 	              'h2',
 	              null,
 	              'Declined ',
-	              this.props.declined
+	              declinedSum
 	            )
 	          )
 	        )
@@ -27667,10 +27698,10 @@
 	  }, {
 	    key: 'handleSave',
 	    value: function handleSave() {
-	      console.log(new Date(this.refs.appliedDate.value));
+	      // console.log(new Date(this.refs.appliedDate.value));
 	      var newInfo = {
 	        company: this.refs.company.value,
-	        appliedDate: new Date(this.refs.appliedDate.value),
+	        appliedDate: this.refs.appliedDate.value,
 	        position: this.refs.position.value,
 	        status: this.refs.status.value,
 	        jobLink: this.refs.jobLink.value
@@ -27707,11 +27738,7 @@
 	        React.createElement(
 	          'h4',
 	          { className: 'appliedDate-display', ref: 'appliedDate' },
-	          date.getMonth() + 1,
-	          ' / ',
-	          date.getDate(),
-	          ' / ',
-	          date.getFullYear()
+	          this.props.appliedDate
 	        ),
 	        React.createElement(
 	          'h3',
@@ -27759,7 +27786,7 @@
 	        React.createElement('input', { type: 'date',
 	          placeholder: 'Applied Date',
 	          ref: 'appliedDate',
-	          defaultValue: date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear(),
+	          defaultValue: this.props.appliedDate,
 	          className: 'appliedDate-input'
 	        }),
 	        React.createElement('input', { type: 'text',
@@ -27796,11 +27823,16 @@
 	  return JobBlock;
 	}(_react.Component);
 
-	JobBlock.propTypes = {};
+	JobBlock.propTypes = {
+	  company: _react.PropTypes.string.isRequired,
+	  appliedDate: _react.PropTypes.string.isRequired,
+	  status: _react.PropTypes.string.isRequired,
+	  jobLink: _react.PropTypes.string.isRequired
+	};
 
 	JobBlock.defaultProps = {
 	  company: 'Default',
-	  appliedDate: new Date(),
+	  appliedDate: 'mm-dd-yyyy',
 	  status: 'replied',
 	  jobLink: '#'
 	};
@@ -27896,123 +27928,130 @@
 	});
 	exports.AddJobForm = undefined;
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _react = __webpack_require__(1);
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	__webpack_require__(255);
 
-	var AddJobForm = exports.AddJobForm = function (_Component) {
-	  _inherits(AddJobForm, _Component);
+	var AddJobForm = exports.AddJobForm = function AddJobForm(_ref) {
+	  var company = _ref.company,
+	      position = _ref.position,
+	      appliedDate = _ref.appliedDate,
+	      status = _ref.status,
+	      jobLink = _ref.jobLink,
+	      addNewJob = _ref.addNewJob;
 
-	  function AddJobForm(props) {
-	    _classCallCheck(this, AddJobForm);
 
-	    var _this = _possibleConstructorReturn(this, (AddJobForm.__proto__ || Object.getPrototypeOf(AddJobForm)).call(this, props));
+	  var _company = void 0,
+	      _position = void 0,
+	      _appliedDate = void 0,
+	      _status = void 0,
+	      _jobLink = void 0;
 
-	    _this.handleSubmit = _this.handleSubmit.bind(_this);
-	    return _this;
-	  }
+	  var handleSubmit = function handleSubmit(e) {
+	    e.preventDefault();
+	    var newJob = {
+	      company: _company.value,
+	      appliedDate: _appliedDate.value,
+	      position: _position.value,
+	      status: _status.value,
+	      jobLink: _jobLink.value
+	    };
+	    //Need to validate form here.
+	    addNewJob(newJob);
+	    _company.value = '';
+	    _appliedDate.value = '';
+	    _position.value = '';
+	    _status.value = '';
+	    _jobLink.value = '';
+	  };
 
-	  _createClass(AddJobForm, [{
-	    key: 'handleSubmit',
-	    value: function handleSubmit() {
-	      var newJob = {
-	        company: this.refs.company.value,
-	        appliedDate: new Date(this.refs.appliedDate.value),
-	        position: this.refs.position.value,
-	        status: this.refs.status.value,
-	        jobLink: this.refs.jobLink.value
-	      };
-
-	      this.props.addNewJob(newJob);
-	      alert('New Job Application Added.');
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'form',
-	        { className: 'add-job-form' },
-	        React.createElement(
-	          'label',
-	          { htmlFor: 'company' },
-	          'Company'
-	        ),
-	        React.createElement('input', { id: 'company',
-	          type: 'text',
-	          placeholder: 'Company',
-	          ref: 'company'
-	        }),
-	        React.createElement(
-	          'label',
-	          { htmlFor: 'position' },
-	          'Position'
-	        ),
-	        React.createElement('input', { id: 'position',
-	          type: 'text',
-	          placeholder: 'Position',
-	          ref: 'position'
-	        }),
-	        React.createElement(
-	          'label',
-	          { htmlFor: 'appliedDate' },
-	          'Applied Date'
-	        ),
-	        React.createElement('input', { id: 'appliedDate',
-	          type: 'date',
-	          placeholder: 'mm/dd/yyyy',
-	          ref: 'appliedDate'
-	        }),
-	        React.createElement(
-	          'label',
-	          { htmlFor: 'status' },
-	          'Current Status'
-	        ),
-	        React.createElement('input', { id: 'status',
-	          type: 'text',
-	          placeholder: 'Current Status',
-	          ref: 'status'
-	        }),
-	        React.createElement(
-	          'label',
-	          { htmlFor: 'jobLink' },
-	          'Job Link'
-	        ),
-	        React.createElement('input', { id: 'jobLink',
-	          type: 'text',
-	          placeholder: 'Career page',
-	          ref: 'jobLink'
-	        }),
-	        React.createElement(
-	          'button',
-	          { onClick: this.handleSubmit },
-	          'Add to Application Reminder'
-	        )
-	      );
-	    }
-	  }]);
-
-	  return AddJobForm;
-	}(_react.Component);
+	  return React.createElement(
+	    'form',
+	    { className: 'add-job-form' },
+	    React.createElement(
+	      'label',
+	      { htmlFor: 'company' },
+	      'Company'
+	    ),
+	    React.createElement('input', { id: 'company',
+	      type: 'text',
+	      placeholder: 'Company',
+	      defaultValue: company,
+	      ref: function ref(input) {
+	        return _company = input;
+	      }
+	    }),
+	    React.createElement(
+	      'label',
+	      { htmlFor: 'position' },
+	      'Position'
+	    ),
+	    React.createElement('input', { id: 'position',
+	      type: 'text',
+	      placeholder: 'Position',
+	      defaultValue: position,
+	      ref: function ref(input) {
+	        return _position = input;
+	      }
+	    }),
+	    React.createElement(
+	      'label',
+	      { htmlFor: 'appliedDate' },
+	      'Applied Date'
+	    ),
+	    React.createElement('input', { id: 'appliedDate',
+	      type: 'date',
+	      placeholder: 'mm/dd/yyyy',
+	      defaultValue: appliedDate,
+	      ref: function ref(input) {
+	        return _appliedDate = input;
+	      }
+	    }),
+	    React.createElement(
+	      'label',
+	      { htmlFor: 'status' },
+	      'Current Status'
+	    ),
+	    React.createElement('input', { id: 'status',
+	      type: 'text',
+	      placeholder: 'Current Status',
+	      defaultValue: status,
+	      ref: function ref(input) {
+	        return _status = input;
+	      }
+	    }),
+	    React.createElement(
+	      'label',
+	      { htmlFor: 'jobLink' },
+	      'Job Link'
+	    ),
+	    React.createElement('input', { id: 'jobLink',
+	      type: 'text',
+	      placeholder: 'Career page',
+	      defaultValue: jobLink,
+	      ref: function ref(input) {
+	        return _jobLink = input;
+	      }
+	    }),
+	    React.createElement(
+	      'button',
+	      { onClick: handleSubmit },
+	      'Add to Application Reminder'
+	    )
+	  );
+	};
 
 	AddJobForm.defaultProps = {
-	  company: 'Alibaba',
+	  company: '',
 	  position: 'Front-End Developer',
-	  appliedDate: '2017-03-04',
-	  status: 'replied',
-	  jobLink: 'https://campus.alibaba.com/traineePositions.htm?refno=11762'
+	  appliedDate: '',
+	  status: 'Pending',
+	  jobLink: ''
 	};
 
 	AddJobForm.propTypes = {
 	  company: _react.PropTypes.string.isRequired,
-	  appliedDate: _react.PropTypes.instanceOf(Date).isRequired,
+	  appliedDate: _react.PropTypes.string.isRequired,
 	  status: _react.PropTypes.string.isRequired,
 	  jobLink: _react.PropTypes.string.isRequired
 	};
