@@ -11,7 +11,7 @@ html, body, div, section, aside, header, footer， nav, h1, h2, h3, h4, h5, h6, 
 
 html {
   font-family: $html-font;
-  font-size: $html-fontSize;
+  font-size: $html-fontSize-big;
   color: $html-text-color;
   height: 100%;
 }
@@ -31,4 +31,16 @@ a{
 }
 a:visited, a:link{
   color: $html-text-color;
+}
+
+@media screen and (max-width: 850px) {
+  html {
+    font-size: $html-fontSize-medium;
+    }
+}
+
+@media screen and (max-width: 500px) {
+  html {
+    font-size: $html-fontSize-small;
+    }
 }

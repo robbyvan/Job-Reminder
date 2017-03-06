@@ -1,6 +1,14 @@
 @import "default";
 
 .jobCount-container {
+
+}
+
+.jobCount-container {
+  display: block;
+  overflow: hidden;
+  // background-color: pink;
+
   .totalJobs {
     font-size: 2.8em;
     text-align: center;
@@ -15,28 +23,40 @@
     justify-content: space-around;
     flex-wrap: wrap;
   }
-  .repliedJobs {
+  .status-block {
+    box-sizing: border-box;
     font-size: 2em;
     margin: 40px 20px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     border-radius: 10px;
-    background-color: $replied-color;
     h2 {
       padding: 10px;
     }
   }
+  .repliedJobs {
+    @extend .status-block;
+    background-color: $replied-color;
+  }
   .pendingJobs {
-    @extend .repliedJobs;
+    @extend .status-block;
     background-color: $main-color;
   }
   .declinedJobs {
-    @extend .repliedJobs;
+    @extend .status-block;
     background-color: $title-color;
   }
   .repliedJobs:hover, .pendingJobs:hover, .declinedJobs:hover{
     color: #fff;
+  }
+  
+}
+
+@media screen and (min-width: 1000px)  {
+  .blank-status{
+    display: none !important;
   }
 }

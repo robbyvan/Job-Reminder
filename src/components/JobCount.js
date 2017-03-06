@@ -33,25 +33,27 @@ export class JobCount extends Component {
         </div>
         <div className="jobStatus">
           <Link to="/joblist/replied">
-              <div className="repliedJobs">
+              <div className="repliedJobs status-block">
               <RepliedJob />
               <h2>Replied {repliedSum}</h2>
             </div>
           </Link>
           
           <Link to="/joblist/pending">
-            <div className="pendingJobs">
+            <div className="pendingJobs status-block">
               <PendingJob />
               <h2>Pending {pendingSum}</h2>
             </div>
           </Link>
 
           <Link to="/joblist/declined">
-            <div className="declinedJobs">
+            <div className="declinedJobs status-block">
               <DeclinedJob />
               <h2>Declined {declinedSum}</h2>
             </div>
           </Link>
+
+          <div className="status-block blank-status"></div>
         </div>
         
         
