@@ -27658,11 +27658,11 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      var jobLength = this.props.myJobs.length;
-
 	      var filteredJobs = this.props.statusFilter ? this.props.myJobs.filter(function (job) {
 	        return job.status.toLowerCase() === _this2.props.statusFilter;
 	      }) : this.props.myJobs;
+
+	      var jobLength = filteredJobs.length;
 
 	      return this.props.loading ? React.createElement(
 	        'h1',
@@ -27712,6 +27712,12 @@
 	          React.createElement('div', { className: 'jobBlock' }),
 	          React.createElement('div', { className: 'jobBlock' })
 	        )
+	      ) :
+	      //No such filter
+	      this.props.myJobs.length ? React.createElement(
+	        'h1',
+	        { className: 'no-job-msg' },
+	        'Whoops, nothing is here.'
 	      ) :
 	      //else, currently no job applications
 	      React.createElement(
