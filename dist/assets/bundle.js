@@ -27664,6 +27664,8 @@
 
 	      var jobLength = filteredJobs.length;
 
+	      var filters = ["replied", "pending", "declined"];
+
 	      return this.props.loading ? React.createElement(
 	        'h1',
 	        { className: 'loading-list' },
@@ -27701,7 +27703,8 @@
 	          'div',
 	          { className: 'job-panel' },
 	          filteredJobs.map(function (job, i) {
-	            return React.createElement(_JobBlock.JobBlock, _extends({ key: i
+	            return React.createElement(_JobBlock.JobBlock, _extends({ key: i,
+	              index: i
 	            }, job, {
 	              saveMyEdit: _this2.props.editJob,
 	              removeFromBoard: _this2.props.removeFromBoard
@@ -27714,16 +27717,16 @@
 	        )
 	      ) :
 	      //No such filter
-	      this.props.myJobs.length ? React.createElement(
+	      this.props.statusFilter && filters.indexOf(this.props.statusFilter) === -1 ? React.createElement(
 	        'h1',
 	        { className: 'no-job-msg' },
-	        'Whoops, 404.'
+	        'Whoops, 404. Nothing is here.'
 	      ) :
 	      //else, currently no job applications
 	      React.createElement(
 	        'h1',
 	        { className: 'no-job-msg' },
-	        'Whoops, you don\'t have any job applications.'
+	        'Whoops, you don\'t have any job applications here.'
 	      );
 	    }
 	  }]);
@@ -27807,7 +27810,7 @@
 	      console.log('newInfo: ');
 	      console.log(newInfo);
 
-	      this.props.saveMyEdit(this.props.key, newInfo);
+	      this.props.saveMyEdit(this.props.index, newInfo);
 
 	      this.setState({
 	        editing: !this.state.editing
@@ -27817,7 +27820,7 @@
 	    key: 'handleRemove',
 	    value: function handleRemove() {
 	      //remove
-	      this.props.removeFromBoard(this.props.key);
+	      this.props.removeFromBoard(this.props.index);
 	      console.log('removed');
 	    }
 	  }, {
@@ -28422,7 +28425,7 @@
 	    React.createElement(
 	      'h1',
 	      null,
-	      'Whoops, nothing is here.'
+	      'Whoops, 404. Nothing is here.'
 	    ),
 	    React.createElement(
 	      _reactRouter.Link,

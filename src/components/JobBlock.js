@@ -37,7 +37,7 @@ export class JobBlock extends Component {
     console.log('newInfo: ');
     console.log(newInfo);
     
-    this.props.saveMyEdit(this.props.key, newInfo);
+    this.props.saveMyEdit(this.props.index, newInfo);
 
 
     this.setState({
@@ -48,7 +48,7 @@ export class JobBlock extends Component {
 
   handleRemove() {
     //remove
-    this.props.removeFromBoard(this.props.key);
+    this.props.removeFromBoard(this.props.index);
     console.log('removed');
   }
 

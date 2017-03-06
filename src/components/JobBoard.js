@@ -22,6 +22,8 @@ export class JobBoard extends Component {
             this.props.myJobs;
 
     let jobLength = filteredJobs.length;
+
+    let filters = ["replied", "pending", "declined"];
             
     return (
       (this.props.loading)? 
@@ -46,7 +48,8 @@ export class JobBoard extends Component {
             
             <div className="job-panel">
                 {filteredJobs.map(
-                  (job, i) => <JobBlock key={i} 
+                  (job, i) => <JobBlock key={i}
+                                        index={i} 
                                         {...job}
                                         saveMyEdit={this.props.editJob}
                                         removeFromBoard={this.props.removeFromBoard}
@@ -60,13 +63,13 @@ export class JobBoard extends Component {
             </div>
         </div>) :
         //No such filter
-        (this.props.myJobs.length)?
+        (this.props.statusFilter && filters.indexOf(this.props.statusFilter) === -1)?
         (<h1 className="no-job-msg">
-          Whoops, 404.
+          Whoops, 404. Nothing is here.
           </h1>) :
         //else, currently no job applications
         (<h1 className="no-job-msg">
-          Whoops, you don't have any job applications.
+          Whoops, you don't have any job applications here.
           </h1>)
     );
   }
