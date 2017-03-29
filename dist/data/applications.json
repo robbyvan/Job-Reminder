@@ -17,18 +17,10 @@
   },
   {
      "id": 2,
-     "company": "Redfin",
-     "appliedDate": "02-10-2017",
-     "position": "Software Engineer",
-     "status": "Declined",
-     "jobLink": "https://www.redfin.com/about/jobs"
-  },
-  {
-     "id": 3,
      "company": "LiveRamp",
      "appliedDate": "02-07-2017",
      "position": "2017 Summer Intern",
-     "status": "Replied",
+     "status": "Declined",
      "jobLink": "https://www.redfin.com/about/jobs"
   }
 ]
