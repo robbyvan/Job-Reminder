@@ -1,21 +1,20 @@
-import 'babel-polyfill'
-
 import React from 'react'
 import { render } from 'react-dom'
-import { App } from './components/App'
-import { Whoops404 } from './components/Whoops404'
-import { Router, Route, hashHistory } from 'react-router'
+
+import App from './js/components/App'
+
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import AllReducers from './js/reducers/AllReducers.js'
+
+const store = createStore(AllReducers);
 
 window.React = React;
 
 render(
-  <Router history={hashHistory}>
-    <Route path="/" component={App} />
-    <Route path="/joblist" component={App}>
-      <Route path=":filter" component={App} />
-    </Route>
-    <Route path="/addjob" component={App} />
-    <Route path="*" component={Whoops404} />
-  </Router>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('react-container')
 );

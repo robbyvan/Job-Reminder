@@ -4,7 +4,7 @@
      "company": "Alibaba",
      "appliedDate": "03-01-2017",
      "position": "Front-End Engineer",
-     "status": "Pending",
+     "status": "Replied",
      "jobLink": "http://www.alibabagroup.com/en/global/careers"
   },
   {
@@ -17,42 +17,10 @@
   },
   {
      "id": 2,
-     "company": "Jet",
-     "appliedDate": "02-28-2017",
-     "position": "2017 Summer Intern",
-     "status": "Pending",
-     "jobLink": "https://jet.com/about-us/working-at-jet/jobs?gh_jid=144507"
-  },
-  {
-     "id": 3,
-     "company": "Yahoo",
-     "appliedDate": "02-07-2017",
-     "position": "2017 Summer Intern",
-     "status": "Pending",
-     "jobLink": "https://careers.yahoo.com/us/students"
-  },
-  {
-     "id": 4,
-     "company": "Redfin",
-     "appliedDate": "02-10-2017",
-     "position": "Software Engineer",
-     "status": "Declined",
-     "jobLink": "https://www.redfin.com/about/jobs"
-  },
-  {
-     "id": 5,
      "company": "LiveRamp",
      "appliedDate": "02-07-2017",
      "position": "2017 Summer Intern",
-     "status": "Replied",
+     "status": "Declined",
      "jobLink": "https://www.redfin.com/about/jobs"
-  },
-  {  
-     "id": 6,       
-     "company": "ebay",
-     "appliedDate": "02-27-2017",
-     "position": "Frontend Software Engineer Intern MS",
-     "status": "Pending",
-     "jobLink": "https://jobs.ebayinc.com/job/san-francisco/front-end-developer/403/4050164"
   }
 ]
