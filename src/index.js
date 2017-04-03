@@ -6,9 +6,9 @@ import App from './js/components/App'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
-import AllReducers from './js/reducers/AllReducers.js'
+import allReducers from './js/reducers/all.js'
 
-const store = createStore(AllReducers);
+const store = createStore(allReducers);
 
 window.React = React;
 
