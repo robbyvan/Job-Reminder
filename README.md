@@ -2,22 +2,25 @@
 A simple app practicing React.js
 
 # Description
-This App is based on ```React + React-Route```.<br />
+This App is based on ```React + React-Router```.<br />
+```
+Components: App -> JobCount / JobBoard / AddJobForm -> JobBlock
+```
 An app to help me remember positions I've applied for.<br />
 
 
 [Job Reminder Demo](https://robbyvan.github.io/Job-Reminder/dist/#/)
 
-#Screenshots
+# Views
 
-##Homepage
+## Homepage
 ![](./screenshots/homepage.jpeg)
 
-##Application List
+## Application List
 ![](./screenshots/list.jpeg)
 
-##Add Form
+## Add Form
 ![](./screenshots/add.jpeg)
 
-##Confirmation
+## Confirmation
 ![](./screenshots/confirm.jpeg)
