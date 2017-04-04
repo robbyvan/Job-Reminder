@@ -1,11 +1,11 @@
-export let initialJobState = [
+let JobInfo = [
                     {  
                        "id": 0,       
                        "company": "Alibaba",
                        "appliedDate": "03-01-2017",
                        "position": "Front-End Engineer",
                        "status": "Replied",
-                       "jobLink": "http://www.alibabagroup.com/en/global/careers"
+                       "jobLink": "http://www.alibabagroup.com/en/global/careers",
                     },
                     {
                        "id": 1,
@@ -25,7 +25,14 @@ export let initialJobState = [
                     }
                   ];
 
+export let initialJobState = JobInfo.map((job) => {
+        return Object.assign({}, job, {editing: false});
+});
+
 const jobReducer = (state=initialJobState, action) => {
+  state.map((job) => {
+    return Object.assign({}, job, {editing: false});
+  });
   return state;
 }
 

@@ -1,12 +1,14 @@
+import { initialJobState } from './jobReducer.js'
+
 const initialFilteredJobs = {
-  filteredJobs: [],
-  jobFilter: false
+  filteredJobs: initialJobState,
+  jobFilter: undefined
 };
 
 const filteredJobsReducer = (state = initialFilteredJobs, action)  => {
 
   // only filter is one of the valid filters, the filter will continue to process
-  let validFilters = ["replied", "pending", "decliened"];
+  let validFilters = ["replied", "pending", "declined"];
 
   switch (action.type) {
 
@@ -25,6 +27,12 @@ const filteredJobsReducer = (state = initialFilteredJobs, action)  => {
           jobFilter: action.payload.jobFilter
         }
       } else {
+        if (action.payload.jobFilter === undefined) {
+          return {
+            filteredJobs: action.payload.jobs,
+            jobFilter: undefined
+          }
+        }
         //no such filter
         return {
           filteredJobs: [],

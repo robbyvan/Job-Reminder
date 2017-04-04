@@ -14,7 +14,30 @@ require('./../../stylesheets/app.scss')
 class App extends Component {
 
   componentDidMount() {
+    // console.log("=====didMount=====");
+    // console.log("---Parameters---");
+    // console.log(this.props.params.filter);
     this.props.filterJobs(this.props.jobs, this.props.params.filter);
+    // console.log("=====didMount=====");
+  }
+
+  shouldComponentUpdate(nextProps) {
+    // console.log("=====shouldUpdate=====")
+    // console.log("currenrt Props: ");
+    // console.log(this.props.params.filter);
+    // console.log("next Props: ");
+    // console.log(nextProps.params.filter);
+    // console.log(this.props.params.filter !== nextProps.params.filter);
+    return this.props.params.filter !== nextProps.params.filter; //必须比较值
+    // console.log("=====shouldUpdate=====")
+    
+  }
+
+  componentWillUpdate(nextProps) {
+    // console.log("=====willUpdate=====");
+    // console.log("next filter is: ", nextProps.params.filter);
+    this.props.filterJobs(this.props.jobs, nextProps.params.filter);
+    // console.log("=====willUpdate=====");
   }
 
   render() {
@@ -45,4 +68,3 @@ function matchDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(App)
-
