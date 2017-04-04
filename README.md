@@ -2,6 +2,18 @@
 A simple app practicing React.js
 
 # Description
+
+## Update
+V2.0
+Now This App is refined with ```Redux```, currently based on ```React + Redux + React-Router```.
+
+```
+Components(Dump): AppRoutes, Menu, JobBoardNav
+Containers(Smart): App, JobCount, JobBoard(>JobBlock), AddJobForm, PopUp
+```
+
+## Initial
+V1.0
 This App is based on ```React + React-Router```.<br />
 ```
 Components: App -> JobCount / JobBoard / AddJobForm -> JobBlock

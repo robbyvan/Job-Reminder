@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import {  Router, Route, hashHistory } from 'react-router'
 
-import App from './App.js'
+import App from './../containers/App.js'
 
 class AppRoutes extends Component {
   render(){
