@@ -18,9 +18,9 @@ class JobBoard extends Component {
           this.props.filteredInfo.filteredJobs.length > 0?
             (<div className="job-panel">
             {
-              this.props.filteredInfo.filteredJobs.map((job) => <JobBlock  key={job.id}
-                                                              {...job}
-                                                              />
+              this.props.filteredInfo.filteredJobs.map((job) => <JobBlock   key={job.id}
+                                                                            {...job}
+                                                                            />
                                       )
             }
               <div className="jobBlock"></div>
@@ -35,7 +35,7 @@ class JobBoard extends Component {
               </h1>):
           // When there's no such route, 404
           (<h1 className="no-job-msg">
-          Whoops, 404. Nothing is here.
+            Whoops, 404. Nothing is here.
           </h1>)
         }
         

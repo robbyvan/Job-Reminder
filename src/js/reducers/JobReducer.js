@@ -1,3 +1,5 @@
+import editJob from './../actions/editJob.js'
+
 let JobInfo = [
                     {  
                        "id": 0,       
@@ -30,9 +32,25 @@ export let initialJobState = JobInfo.map((job) => {
 });
 
 const jobReducer = (state=initialJobState, action) => {
-  state.map((job) => {
-    return Object.assign({}, job, {editing: false});
-  });
+  // state.map((job) => {
+  //   return Object.assign({}, job, {editing: false});
+  // });
+  switch (action.type) {
+    case "EDIT_JOB":
+      state.map((job) => {
+          if (job.id === action.payload) {
+            // console.log("match!!!!!!")
+            job = {...job, editing: true};
+          }
+          return job;
+        });
+      break;
+
+    case "REMOVE_JOB":
+      state = state.splice(action.payload, 1);
+      break;
+
+  }
   return state;
 }
 

@@ -1,7 +1,10 @@
 import { Component } from 'react'
 
-import { bindActionsCreator } from 'redux'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
+import { editJob } from './../actions/editJob.js'
+import { removeJob } from './../actions/removeJob.js'
 
 require('./../../stylesheets/JobBlock.scss');
 
@@ -19,21 +22,83 @@ class JobBlock extends Component {
               ref="jobLink">
             Career Page
           </a>
-          <button className="editJob">Edit</button>
-          <button className="removeJob">Remove</button>
+          <button className="editJob" 
+                  onClick={() => this.props.editJob(this.props.id)}
+                  >
+            Edit
+          </button>
+          <button className="removeJob"
+                  onClick={() => this.props.removeJob(this.props.id)}
+                  >
+            Remove
+          </button>
+        </div>
+    );
+  }
+
+  renderEditing() {
+    let date = this.props.appliedDate;
+
+    return (
+        <div className="jobBlock">
+          <input  type="text"
+                  placeholder="Company" 
+                  ref="company" 
+                  defaultValue={this.props.company}
+                  className="company-input"
+          />
+
+          <input  type="date" 
+                  placeholder="Applied Date"
+                  ref="appliedDate" 
+                  defaultValue={
+                    this.props.appliedDate
+                  }
+                  className="appliedDate-input"
+          />
+
+          <input  type="text" 
+                  placeholder="Applied Postion"
+                  ref="position"
+                  defaultValue={this.props.position}
+                  className="position-input" 
+          />
+
+          <input  type="text" 
+                  ref="status" 
+                  defaultValue={this.props.status}
+                  className="status-input"
+          />
+
+          <input  type="text" 
+                  placeholder="Application Status"
+                  ref="jobLink" 
+                  defaultValue={this.props.jobLink}
+                  className="jobLink-input"
+          />
+          
+          <button className="saveJob" onClick={this.handleSave}>Save</button>
+
         </div>
     );
   }
 
   render() {
     return (
-      this.renderNormal()
+      this.props.editing? this.renderEditing():this.renderNormal()
     );
   }
 
 }
 
-export default JobBlock
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({
+    editJob: editJob,
+    removeJob: removeJob
+  }, dispatch);
+}
+
+export default connect(null, matchDispatchToProps)(JobBlock)
  
 
 

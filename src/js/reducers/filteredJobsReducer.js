@@ -40,6 +40,28 @@ const filteredJobsReducer = (state = initialFilteredJobs, action)  => {
         }
       }
       break;
+
+    case "EDIT_JOB":
+      state = {
+        ...state,
+        filteredJobs: state.filteredJobs.map((job) => {
+          if (job.id === action.payload) {
+            // console.log("match!!!!!!");
+            job = {...job, editing: true};
+          }
+          return job;
+        })
+      };
+      break;
+
+    case "REMOVE_JOB":
+    console.log(state);
+      state = {
+        ...state,
+        filteredJobs: state.filteredJobs.splice(action.payload, 1)
+      };
+      console.log(state);
+      break;
   }
 
   return state;
