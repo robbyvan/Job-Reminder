@@ -22,21 +22,21 @@ class App extends Component {
     // console.log("=====didMount=====");
   }
 
-  shouldComponentUpdate(nextProps) {
-    // console.log("=====shouldUpdate=====")
-    // console.log("currenrt Props: ");
-    // console.log(this.props.params.filter);
-    // console.log("next Props: ");
-    // console.log(nextProps.params.filter);
-    // console.log(this.props.params.filter !== nextProps.params.filter);
+  // shouldComponentUpdate(nextProps) {
+  //   // console.log("=====shouldUpdate=====")
+  //   // console.log("currenrt Props: ");
+  //   // console.log(this.props.params.filter);
+  //   // console.log("next Props: ");
+  //   // console.log(nextProps.params.filter);
+  //   // console.log(this.props.params.filter !== nextProps.params.filter);
 
-    return this.props !== nextProps;
-    // return this.props.params.filter !== nextProps.params.filter ||
-           // this.props.jobs !== nextProps.jobs; //必须比较值
+  //   return this.props !== nextProps;
+  //   // return this.props.params.filter !== nextProps.params.filter ||
+  //          // this.props.jobs !== nextProps.jobs; //必须比较值
 
-    // console.log("=====shouldUpdate=====")
+  //   // console.log("=====shouldUpdate=====")
     
-  }
+  // }
 
   componentWillUpdate(nextProps) {
     // console.log("=====willUpdate=====");
