@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 
 import { filterJobs } from './../actions/filterJobs.js'
 
-import Menu from './Menu.js'
-import JobCount from './../containers/JobCount.js'
-import JobBoard from './../containers/JobBoard.js'
-import AddJobForm from './../containers/AddJobForm.js'
+import Menu from './../components/Menu.js'
+import JobCount from './JobCount.js'
+import JobBoard from './JobBoard.js'
+import AddJobForm from './AddJobForm.js'
 
 require('./../../stylesheets/app.scss')
 

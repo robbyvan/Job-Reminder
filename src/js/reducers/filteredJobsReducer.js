@@ -72,6 +72,13 @@ const filteredJobsReducer = (state = initialFilteredJobs, action)  => {
         })
       }
       break;
+
+      case "ADD_JOB":
+      state = {
+        ...state,
+        filteredJobs: [...state.filteredJobs, action.payload.detail]
+      }
+      break;
   }
 
   return state;
