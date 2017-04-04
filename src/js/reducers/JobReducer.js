@@ -1,30 +1,32 @@
-const jobReducer = () => {
-  return [
-          {  
-             "id": 0,       
-             "company": "Alibaba",
-             "appliedDate": "03-01-2017",
-             "position": "Front-End Engineer",
-             "status": "Replied",
-             "jobLink": "http://www.alibabagroup.com/en/global/careers"
-          },
-          {
-             "id": 1,
-             "company": "Tencent",
-             "appliedDate": "03-01-2017",
-             "position": "Front-End Developer",
-             "status": "Pending",
-             "jobLink": "http://join.qq.com/"
-          },
-          {
-             "id": 2,
-             "company": "LiveRamp",
-             "appliedDate": "02-07-2017",
-             "position": "2017 Summer Intern",
-             "status": "Declined",
-             "jobLink": "https://www.redfin.com/about/jobs"
-          }
-        ];
+export let initialJobState = [
+                    {  
+                       "id": 0,       
+                       "company": "Alibaba",
+                       "appliedDate": "03-01-2017",
+                       "position": "Front-End Engineer",
+                       "status": "Replied",
+                       "jobLink": "http://www.alibabagroup.com/en/global/careers"
+                    },
+                    {
+                       "id": 1,
+                       "company": "Tencent",
+                       "appliedDate": "03-01-2017",
+                       "position": "Front-End Developer",
+                       "status": "Pending",
+                       "jobLink": "http://join.qq.com/"
+                    },
+                    {
+                       "id": 2,
+                       "company": "LiveRamp",
+                       "appliedDate": "02-07-2017",
+                       "position": "2017 Summer Intern",
+                       "status": "Declined",
+                       "jobLink": "https://www.redfin.com/about/jobs"
+                    }
+                  ];
+
+const jobReducer = (state=initialJobState, action) => {
+  return state;
 }
 
 export default jobReducer;

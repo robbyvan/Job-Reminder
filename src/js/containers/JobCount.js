@@ -78,6 +78,7 @@ function mapStateToProps(store) {
 }
 
 JobCount.propTypes = {
+    jobs: PropTypes.array.isRequired,
     total: PropTypes.number.isRequired,
     replied: PropTypes.number.isRequired,
     pending: PropTypes.number.isRequired,
@@ -85,6 +86,7 @@ JobCount.propTypes = {
 };
 
 JobCount.defaultProps = {
+  jobs: [],
   total: 0,
   replied: 0,
   pending: 0,

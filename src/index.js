@@ -1,30 +1,23 @@
 import React from 'react'
 import { render } from 'react-dom'
-import {  Router, Route, hashHistory } from 'react-router'
 
-import App from './js/components/App'
+import logger from "redux-logger"
+import AppRoutes from './js/containers/AppRoutes.js'
 
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 
 import allReducers from './js/reducers/all.js'
 
-const store = createStore(allReducers,);
+const middleware = applyMiddleware(logger());
+
+const store = createStore(allReducers, middleware);
 
 window.React = React;
 
 render(
   <Provider store={store}>
-    <Router history={hashHistory}>
-      <Route path="/" component={App} />
-
-      <Route path="/joblist" component={App}>
-        <Route path=":filter" component={App} />
-      </Route>
-
-      <Route path="/addjob" component={App} />
-
-    </Router>
+    <AppRoutes />
   </Provider>,
   document.getElementById('react-container')
 );
