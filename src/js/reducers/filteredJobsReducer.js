@@ -46,7 +46,6 @@ const filteredJobsReducer = (state = initialFilteredJobs, action)  => {
         ...state,
         filteredJobs: state.filteredJobs.map((job) => {
           if (job.id === action.payload) {
-            // console.log("match!!!!!!");
             job = {...job, editing: true};
           }
           return job;
@@ -55,15 +54,23 @@ const filteredJobsReducer = (state = initialFilteredJobs, action)  => {
       break;
 
     case "REMOVE_JOB":
-      console.log("before:", state);
+      // console.log("before:", state);
       state = {
         ...state,
-        filteredJobs: state.filteredJobs.filter((job) => {
-          // console.log(typeof job.id, typeof action.payload);
-          return job.id !== action.payload
-        })
+        filteredJobs: state.filteredJobs.filter((job) => job.id !== action.payload)
       };
-      console.log("after:", state);
+      // console.log("after:", state);
+      break;
+
+    case "SAVE_JOB":
+      state = {
+        ...state,
+        filteredJobs: state.filteredJobs.map((job) => {
+          return (job.id === action.payload.id)?
+                  action.payload.detail:
+                  job;
+        })
+      }
       break;
   }
 

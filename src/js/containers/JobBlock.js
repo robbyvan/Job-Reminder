@@ -4,11 +4,26 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { editJob } from './../actions/editJob.js'
+import { saveJob } from './../actions/saveJob.js'
 import { removeJob } from './../actions/removeJob.js'
 
 require('./../../stylesheets/JobBlock.scss');
 
 class JobBlock extends Component {
+
+  handleSave() {
+    let jobDetail = {
+      company: this.refs.company.value,
+      appliedDate: this.refs.appliedDate.value,
+      position: this.refs.position.value,
+      status: this.refs.status.value,
+      jobLink: this.refs.jobLink.value,
+      editing: false
+    };
+
+    console.log("new info: ", jobDetail);
+    this.props.saveJob(this.props.id, jobDetail);
+  }
 
   renderNormal() {
     return (
@@ -77,7 +92,11 @@ class JobBlock extends Component {
                   className="jobLink-input"
           />
           
-          <button className="saveJob" onClick={this.handleSave}>Save</button>
+          <button className="saveJob" 
+                  onClick={() => this.handleSave()}
+                  >
+            Save
+          </button>
 
         </div>
     );
@@ -94,7 +113,8 @@ class JobBlock extends Component {
 function matchDispatchToProps(dispatch) {
   return bindActionCreators({
     editJob: editJob,
-    removeJob: removeJob
+    removeJob: removeJob,
+    saveJob: saveJob
   }, dispatch);
 }
 
