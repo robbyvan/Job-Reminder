@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 
 import logger from "redux-logger"
-import AppRoutes from './js/containers/AppRoutes.js'
+import AppRoutes from './js/components/AppRoutes.js'
 
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
