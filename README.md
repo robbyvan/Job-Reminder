@@ -8,7 +8,7 @@ An app to Practice React, help users to remember positions they've applied for.<
 Now This App is refined with ```Redux```, currently based on ```React + Redux + React-Router```.
 
 ```
-Components(Dump): AppRoutes, Menu, JobBoardNav
+Components(Dumb): AppRoutes, Menu, JobBoardNav
 Containers(Smart): App, JobCount, JobBoard(>JobBlock), AddJobForm, PopUp
 ```
 ## v1.0    
