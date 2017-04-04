@@ -47,9 +47,11 @@ const jobReducer = (state=initialJobState, action) => {
       break;
 
     case "REMOVE_JOB":
-      state = state.splice(action.payload, 1);
+      state = state.filter((job) => {
+        // console.log(typeof job.id, typeof action.payload); // becareful of the type!
+        return job.id !== action.payload
+      });
       break;
-
   }
   return state;
 }
