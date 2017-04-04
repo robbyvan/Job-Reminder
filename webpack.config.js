@@ -36,5 +36,8 @@ module.exports = {
         loader: 'style-loader!css-loader!autoprefixer-loader'
       },
     ]
-  }
+  },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin()
+  ]
 }
