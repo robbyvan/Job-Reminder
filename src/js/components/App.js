@@ -8,6 +8,7 @@ import { filterJobs } from './../actions/filterJobs.js'
 import Menu from './Menu.js'
 import JobCount from './../containers/JobCount.js'
 import JobBoard from './../containers/JobBoard.js'
+import AddJobForm from './../containers/AddJobForm.js'
 
 require('./../../stylesheets/app.scss')
 
@@ -54,7 +55,7 @@ class App extends Component {
           <h1 className="app-name">Job Application Reminder</h1>
 
           <div className="page-content">
-            <JobBoard /> 
+            <AddJobForm />
           </div>
 
       </div>

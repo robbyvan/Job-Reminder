@@ -54,6 +54,10 @@ const jobReducer = (state=initialJobState, action) => {
                 job;
       });
       break;
+
+    case "ADD_JOB":
+      state.push(action.payload.detail);
+      break;
   }
   return state;
 }
