@@ -55,7 +55,13 @@ class App extends Component {
           <h1 className="app-name">Job Application Reminder</h1>
 
           <div className="page-content">
-            <AddJobForm />
+            {
+              (this.props.location.pathname === "/") ?
+                <JobCount /> :
+              (this.props.location.pathname === "/addjob")?
+                <AddJobForm /> :
+              <JobBoard />
+            }
           </div>
 
       </div>
