@@ -1,21 +1,29 @@
 # Job-Reminder
-An app to Practice React, help users to remember positions they've applied for.<br />
-[Job Reminder Demo](https://robbyvan.github.io/Job-Reminder/dist/#/)
+A simple app practicing React.js
 
 # Description
 
-## v2.0    
+## Update
+V2.0    
 Now This App is refined with ```Redux```, currently based on ```React + Redux + React-Router```.
 
 ```
-Components(Dumb): AppRoutes, Menu, JobBoardNav
+Components(Dump): AppRoutes, Menu, JobBoardNav
 Containers(Smart): App, JobCount, JobBoard(>JobBlock), AddJobForm, PopUp
+Actions: ADD_JOB, EDIT_JOB, FILTER_JOB, SAVE_JOB, REMOVE_JOB, TOGGLE_POPUP
+Reducers: JobReducer, filteredJobsReducer, UIReducer
 ```
-## v1.0    
+
+## Initial
+V1.0    
 This App is based on ```React + React-Router```.<br />
 ```
 Components: App -> JobCount / JobBoard / AddJobForm -> JobBlock
 ```
+An app to help me remember positions I've applied for.<br />
+
+
+[Job Reminder Demo](https://robbyvan.github.io/Job-Reminder/dist/#/)
 
 # Views
 
