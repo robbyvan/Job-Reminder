@@ -34,7 +34,7 @@ Components: App -> JobCount / JobBoard / AddJobForm -> JobBlock
 An app to help me remember positions I've applied for.<br />
 
 
-[Job Reminder Demo](https://robbyvan.github.io/Job-Reminder/dist/#/)
+[Job Reminder Demo](https://robbyvan.github.io/Job-Reminder/dist/?#/)
 
 # Views
 
