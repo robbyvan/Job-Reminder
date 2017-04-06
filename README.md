@@ -7,7 +7,6 @@ A simple app practicing React.js
 V2.0    
 Now This App is refined with ```Redux```, currently based on ```React + Redux + React-Router```.
 
-```
 + Components(Dump)
   - AppRoutes
   - Menu
@@ -16,7 +15,7 @@ Now This App is refined with ```Redux```, currently based on ```React + Redux + 
   - App
   - JobCount
   - JobBoard
-    +JobBlock
+    + JobBlock
   - AddJobForm
     + PopUp
 + Actions
@@ -25,7 +24,6 @@ Now This App is refined with ```Redux```, currently based on ```React + Redux + 
   - JobReducer
   - filteredJobsReducer
   - UIReducer
-```
 
 ## Initial
 V1.0    
