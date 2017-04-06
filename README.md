@@ -8,10 +8,23 @@ V2.0
 Now This App is refined with ```Redux```, currently based on ```React + Redux + React-Router```.
 
 ```
-Components(Dump): AppRoutes, Menu, JobBoardNav
-Containers(Smart): App, JobCount, JobBoard(>JobBlock), AddJobForm, PopUp
-Actions: ADD_JOB, EDIT_JOB, FILTER_JOB, SAVE_JOB, REMOVE_JOB, TOGGLE_POPUP
-Reducers: JobReducer, filteredJobsReducer, UIReducer
++ Components(Dump)
+  - AppRoutes
+  - Menu
+  - JobBoardNav
++ Containers(Smart)
+  - App
+  - JobCount
+  - JobBoard
+    +JobBlock
+  - AddJobForm
+    + PopUp
++ Actions
+  - ADD_JOB, EDIT_JOB, FILTER_JOB, SAVE_JOB, REMOVE_JOB, TOGGLE_POPUP
++ Reducers:
+  - JobReducer
+  - filteredJobsReducer
+  - UIReducer
 ```
 
 ## Initial
